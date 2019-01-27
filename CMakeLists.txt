@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 2.6)
+project(stepworks)
+
+add_definitions ( -Wall   -lstdc++ )
+
+if (MAKE_GCC7)
+  add_definitions( -std=c++17)
+else()
+  add_definitions( -std=c++1z)
+endif()
+
+
+
+include_directories(
+./include 
+)
+
+add_executable(stepworks main.cpp)
+
+add_subdirectory(test)
+
+install(TARGETS stepworks RUNTIME DESTINATION bin)
