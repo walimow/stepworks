@@ -1,6 +1,8 @@
 
 #pragma once
 
+///Forward-Reader with Base&&   (because std::list in libstdc++)
+
 #include <foab.first/isvalid.hpp>
 #include <xtypes.hpp>
 #include <util/optional_type.hpp>
@@ -19,7 +21,6 @@ template <typename Ta,
 struct fw_t //<Ta, Src<Ta>, Form<Ta>>
 {
     using atype=Ta;
-    //const
     Src<Ta>&& _src;
     typename Src<Ta>::iterator _it;
     Ta _get()const {
@@ -33,10 +34,8 @@ struct fw_t //<Ta, Src<Ta>, Form<Ta>>
         _it = _src.begin();
     }
 
-//    bool test;
     fw_t(Src<Ta>&&s, const typename Src<Ta>::iterator& it)
         :_src(std::move(s)), _it(it) {
-  //      test= _it==_src.end();
     }
 
 
@@ -61,7 +60,6 @@ auto make_forward_readeable_t( Src<Ta>&& s)-> fw_t <Ta, Src, Form> {
     fw_t <Ta, Src, Form>  r = fw_t <Ta, Src, Form> { std::move(s) };
 
     r._it=r._src.begin();
-    auto test=r._it==r._src.end();
     return std::move(r);
 }
 
@@ -80,10 +78,8 @@ auto  _go_ ( fw_t<Ta, Src, Form >&& src  )->std::pair<Form<Ta>,  fw_t<Ta, Src,Fo
 {
     if ( src )
     {
-        //    auto test0 = src._it ==src._src.end();
         auto a0  = src._get();
-        auto it1 =  ++src._it;
-        //   auto test = src._it ==src._src.end();
+        ++src._it;
         return std::make_pair(
                    a0,
                    make_forward_readeable_t( std::move(std::move(src._src)), src._it)

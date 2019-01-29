@@ -365,9 +365,22 @@ namespace stepworks{
         return (a0) ? f( *a0, std::move(b)) : std::move(b);
     }
     
+    
+    template <typename Ta,   typename Tb>
+    auto apply_optional(const types::var_t<Ta>& a0, Tb&& b, fwrite_ab<Ta,Tb> f,bool (*predicate)(const Ta&)){
+        return (a0 && predicate(*a0)) ? f( *a0, std::move(b)) : std::move(b);
+    }
+    
+    
     template <typename Ta,   typename Tb, typename F>
     auto apply_optional(const types::var_t<Ta>& a0, Tb&& b, F f){
         return (a0) ? f( (const Ta&) *a0, std::move(b)) : std::move(b);
+    }
+    
+    
+    template <typename Ta,   typename Tb, typename F>
+    auto apply_optional(const types::var_t<Ta>& a0, Tb&& b, F f,bool (*predicate)(const Ta&)){
+        return (a0 && predicate( (const Ta&) *a0 ) ) ? f( (const Ta&) *a0, std::move(b)) : std::move(b);
     }
     
     
@@ -377,10 +390,22 @@ namespace stepworks{
         return f( a, std::move(b));
     }
     
+    
+    template <typename Ta,   typename Tb>
+    auto apply_optional(const Ta& a, Tb&& b, fwrite_ab<Ta,Tb> f, bool (*predicate)(const Ta&)){
+        return predicate(a) ?  f( a, std::move(b))  : std::move(b)  ;
+    }
+    
     ////
     template <typename Ta,   typename Tb, template<typename> typename Form>
     auto apply_optional(const Form<Ta>& a0, Tb&& b, fwrite_ab<Ta,Tb> f){
         return ( a0.index())?  f( std::get<1>(a0)  , std::move(b)) : std::move(b) ;
+    }
+    
+    ///with predicate
+    template <typename Ta,   typename Tb, template<typename> typename Form>
+    auto apply_optional(const Form<Ta>& a0, Tb&& b, fwrite_ab<Ta,Tb> f, bool (*predicate)(const Ta&)){
+        return ( a0.index()  && predicate(std::get<1>(a0))    )?  f( std::get<1>(a0)  , std::move(b)) : std::move(b) ;
     }
     
     /*

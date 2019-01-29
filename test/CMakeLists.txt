@@ -18,16 +18,20 @@ include_directories(${GTEST_INCLUDE_DIR})
 add_executable(runUnitTests
 
 foab_test.cpp
-xT_test.cpp        
+xT_test.cpp          #clang-problem
 
 process_item_test.cpp
 stw_typetraits.cpp
 
 foab_fab_test.cpp
+
+
 processing_test.cpp
 
 rtype_test.cpp
 wtype_test.cpp
+
+filter_test.cpp
 
 )
 

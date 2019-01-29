@@ -100,12 +100,6 @@ auto make_forward_readeable( Src<Ta> &&s, const typename Src<Ta>::iterator& it )
     return std::move(  fw <Ta, Src, Form> { std::move(s), it });
 }
 
-/*
-template <typename Ta, template <typename... > typename Src, template <typename > typename Form=var_t  >
-auto make_forward_readeable( const Src<Ta>& s, typename Src<Ta>::iterator it )-> fw <Ta, Src, Form> {
-    return  fw <Ta, Src, Form> { s, it };
-}
-*/
 
 template<typename Ta,
          template <typename... > typename Src,
@@ -113,47 +107,42 @@ template<typename Ta,
          >
 auto  _go_ ( fw<Ta, Src, Form >&& src  )->std::pair<Form<Ta>,  fw<Ta, Src,Form> >
 {
-
-    //auto src =std::move(src_);
     if ( src )
     {
-        
-        
         auto test0 = src._it ==src._src.end();
-
         auto a0  = src._get();
-       auto it1 =  ++src._it;
-
-        auto test = src._it ==src._src.end();
-        
-    //    auto  c = std::move(src._src);
-//        auto  it = std::move(src._it);
-//        test = it ==c.end();
-               
-        // fw<Ta, Src, Form >  s2{  src._src, src._it }  ;
-        
-/*   {
-        test = src._it ==src._src.end();
-       
-        auto res = make_forward_readeable(std::move(c), std::move(it)) ;
-        test = res._it ==res._src.end();
-       
-}*/
-        
-
+        ++src._it;
         return std::make_pair(
                     a0, 
-                    //src //
-                    //std::move(fw<Ta, Src, Form >{ std::move(src._src), std::move(src._it) } ) 
-                //    std::move(make_forward_readeable(std::move(c), std::move(it)) )
                    make_forward_readeable( std::move(src._src), src._it)
-                     // fw<Ta, Src, Form >{ std::move(c), std::move(it) }
-                   // std::forward<  fw<Ta, Src,Form> >(std::move(src))
-               //     std::move(src)
                     );
     }
     else
         return std::make_pair( Form<Ta> {}, src);
 }
+
+
+/*
+template<typename Ta,
+         template <typename... > typename Src,
+         template <typename > typename Form
+         >
+auto  _go_ ( fw<Ta, Src, Form >&& src , bool (*predicate)(const Ta&) )->std::pair<Form<Ta>,  fw<Ta, Src,Form> >
+{
+    if ( src )
+    {
+        auto a0  = src._get();
+        auto it1 =  ++src._it;
+        
+
+        return std::make_pair(
+                    a0, 
+                   make_forward_readeable( std::move(src._src), src._it)
+                    );
+    }
+    else
+        return std::make_pair( Form<Ta> {}, src);
+}
+*/
 
 }

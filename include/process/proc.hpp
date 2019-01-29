@@ -1,10 +1,11 @@
 #pragma once
 
 #include <util/optional_type.hpp>
+#include <util/optional.hpp>
 
 namespace stepworks::process{
 
-    
+using     stepworks::types::_asserted;
     
     // ******   returns <R,W>
     
@@ -12,18 +13,31 @@ namespace stepworks::process{
     template< typename Reader, typename Ta, template<typename>typename Form= stepworks::types::var_t>
     struct proc{        
         Reader&& _r;        
-        template < typename Writer  /*= decltype(Reader::atype)*/ >
+        template < typename Writer  >
         auto operator ()(Writer&&w)->std::pair<Reader,Writer >{
              
             if (std::pair<  Form<Ta>, Reader> a0r =   stepworks:: _go_<Ta>(  std::move( _r  ) )  ; (a0r.first)  ){
-                  return  {
-                   
+                  return  {                   
                       proc{ std::move(a0r.second)  } 
                         (   stepworks::_go_ 
-                        //<Ta, Writer,Form>
                         (  std::move(w),   a0r.first ))
                   };
-                  //if ()
+            }
+            else{
+                 return std::make_pair(std::move(a0r.second), std::move(w));
+            }
+        }
+        ///predicat
+        template < typename Writer >
+        auto operator ()(Writer&&w, bool (*predicat)(const Ta&))->std::pair<Reader,Writer >{
+            
+            if (std::pair<  Form<Ta>, Reader> a0r =   stepworks:: _go_<Ta>(  std::move( _r  ))  ; (a0r.first)  ){
+                  return  {                   
+                      proc{ std::move(a0r.second)  } 
+                        (   stepworks::_go_
+                            (  std::move(w),   a0r.first , predicat),
+                            predicat)
+                  };
             }
             else{
                  return std::make_pair(std::move(a0r.second), std::move(w));
@@ -88,18 +102,27 @@ namespace stepworks::process{
                  return std::make_pair(std::move(a0r.second), std::move(w));
             }
         }
-        
     };    
     
     
     template<
     typename Ta,
     typename Reader,
-     
-    //template<typename...>
-    typename Writer , template<typename>typename Form= stepworks::types::var_t>
+    typename Writer , 
+    template<typename>typename Form= stepworks::types::var_t
+    >
     auto perform_process( Reader&& r, Writer   && w){      
         return proc<Reader,Ta,Form>{ std::move(r) }(std::move(w));
+    }
+    
+    template<
+    typename Ta,
+    typename Reader,
+    typename Writer ,
+    template<typename>typename Form= stepworks::types::var_t
+    >
+    auto perform_process( Reader&& r, Writer   && w, bool (*predicat)(const Ta&)){      
+        return proc<Reader,Ta,Form>{ std::move(r) }(std::move(w), predicat);
     }
     
     template<
@@ -107,11 +130,10 @@ namespace stepworks::process{
     typename Foab,
     typename Reader,
     
-        typename Writer , template<typename>typename Form= stepworks::types::var_t>
+    ///procT
+    
+    typename Writer , template<typename>typename Form= stepworks::types::var_t>
     auto perform_process( Reader&& r, Writer   && w, Foab&& foab){      
-        {
-        auto test = proct<Reader,Ta,Foab,Form>{ std::move(r),std::move(foab) };
-        }
         return proct<Reader,Ta,Foab,Form>{ std::move(r),std::move(foab) }
         (std::move(w) );
     }
@@ -139,8 +161,7 @@ namespace stepworks::process{
                     return proc0{ std::move(a0r0.second)  } (  w );
                 else{   ///break
                     return  make_pair(a0r0.second,  std::move(w)) ;
-                }
-                //return std::make_pair(std::move(a0r.second), std::move(_r));
+                }              
             }
         }
     };
