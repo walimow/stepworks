@@ -9,6 +9,9 @@ using     stepworks::types::_asserted;
     
     // ******   returns <R,W>
     
+
+    //template< typename ...> struct proc;
+
     //breaks on a0
     template< typename Reader, typename Ta, template<typename>typename Form= stepworks::types::var_t>
     struct proc{        
@@ -72,7 +75,6 @@ using     stepworks::types::_asserted;
         
         Reader&& _r;
         Foab && _tfoab;
-        
 
         template < typename Writer  /*= decltype(Reader::atype)*/ >
         auto operator ()(Writer&&w)->std::pair<Reader,Writer >{
@@ -203,7 +205,37 @@ using     stepworks::types::_asserted;
         
     };
     
+    
+  ///generator reader: controlled by function
   
+    template <typename Reader, typename Ta>
+    struct proc_controlled{
+        Reader&& r;
+        using Fcontrol = bool(*)(const Ta&,void*);
+        Fcontrol _f;
+        template < typename Writer>
+        std::pair<Reader,Writer> operator ()(Writer&&w){     
+           
+            
+            if ( std::pair<Ta, Reader> ar = _go_( std::move(r) ) ;
+                                                ( _f(ar.first, nullptr) ) )
+                return proc_controlled{ std::move(ar.second), _f}( _go_( std::move( w), ar.first ) );
+            else
+                return make_pair(r, w);
+        }
+        
+    };
+    
+    template<
+    typename Ta,
+    typename Reader,
+    typename Writer
+    >
+    std::pair<Reader,Writer> perform_process_controlled( Reader&& r, Writer   && w, 
+                                     bool (*control)(const Ta&, void*))
+    {      
+        return proc_controlled<Reader,Ta>{ std::move(r), control }(std::move(w));
+    }
     
 }
 

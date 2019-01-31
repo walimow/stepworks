@@ -24,14 +24,15 @@ process_item_test.cpp
 stw_typetraits.cpp
 
 foab_fab_test.cpp
-
-
 processing_test.cpp
 
 rtype_test.cpp
 wtype_test.cpp
 
 filter_test.cpp
+
+rgenerator_test.cpp
+match_test.cpp
 
 )
 
