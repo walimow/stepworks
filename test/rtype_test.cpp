@@ -42,3 +42,7 @@ TEST(rtype_test,  rstream_isstream) {
     EXPECT_EQ(  stepworks::types::_optional(   r2.first,-1),42);
 }
 
+
+////using prime
+#include <prim/rcontainer.hpp>
+////TODO Test r-prime

@@ -340,7 +340,7 @@ struct minus{
 TEST(xtypes_test,  impl_apply_1) {
     stepworks::types::var_t_type<int,int> x1{1};
   
-  auto res= stepworks::types::apply<int,int>(x1, test::minus<int,double>{});
+  auto res= stepworks::types::apply<int,int>(std::move( x1), test::minus<int,double>{});
 
 }
 

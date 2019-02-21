@@ -24,20 +24,20 @@ struct fw //<Ta, Src<Ta>, Form<Ta>>
     Ta _get()const {
         return *_it;
     }
-    
+
     fw()=default;
     fw(const fw&)=default;
     fw(Src<Ta>&&s)
-    :_src(s){
+        :_src(s) {
         _it = _src.begin();
     }
-    
+
     bool test;
-    
+
     fw(Src<Ta>&&s, const typename Src<Ta>::iterator& it)
-    :_src(s), _it(it){
-         test= _it==s.end();
-         test= _it==_src.end();
+        :_src(s), _it(it) {
+        test= _it==s.end();
+        test= _it==_src.end();
     }
 
 
@@ -113,9 +113,9 @@ auto  _go_ ( fw<Ta, Src, Form >&& src  )->std::pair<Form<Ta>,  fw<Ta, Src,Form> 
         auto a0  = src._get();
         ++src._it;
         return std::make_pair(
-                    a0, 
+                   a0,
                    make_forward_readeable( std::move(src._src), src._it)
-                    );
+               );
     }
     else
         return std::make_pair( Form<Ta> {}, src);
@@ -133,10 +133,8 @@ auto  _go_ ( fw<Ta, Src, Form >&& src , bool (*predicate)(const Ta&) )->std::pai
     {
         auto a0  = src._get();
         auto it1 =  ++src._it;
-        
-
         return std::make_pair(
-                    a0, 
+                    a0,
                    make_forward_readeable( std::move(src._src), src._it)
                     );
     }

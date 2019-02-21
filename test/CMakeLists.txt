@@ -18,7 +18,7 @@ include_directories(${GTEST_INCLUDE_DIR})
 add_executable(runUnitTests
 
 foab_test.cpp
-xT_test.cpp          #clang-problem
+xT_test.cpp         
 
 process_item_test.cpp
 stw_typetraits.cpp
@@ -32,7 +32,14 @@ wtype_test.cpp
 filter_test.cpp
 
 rgenerator_test.cpp
-match_test.cpp
+
+match_wte_test.cpp
+match_wtex_test.cpp
+
+application_test.cpp
+
+
+
 
 )
 

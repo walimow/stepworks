@@ -13,7 +13,7 @@ namespace stepworks{
     template <typename Ta, typename Tb>
     struct  foab<Ta,Tb>{
 
-        using F = Tb(*)( Ta&&);      //&&
+        using F = Tb(*)(const  Ta&);      //&&
         using _argument_type=Ta;
         using _return_type=Tb;
         const F _f;
@@ -49,7 +49,7 @@ namespace stepworks{
     
         
     template <typename Ta>
-    auto ident( Ta&& a)-> Ta{  return  std::forward<Ta>(a);}
+    auto ident( const Ta& a)-> Ta{  return a;}   // return  std::forward<Ta>(a);}
     
     template<typename Ta, typename Tb>
     auto make_foab( typename  foab<Ta,Tb>::F f)->foab<Ta,Tb>{

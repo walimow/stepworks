@@ -9,7 +9,7 @@ else()
   add_definitions( -std=c++1z)
 endif()
 
-
+set (CMAKE_BUILD_TYPE Debug)
 
 include_directories(
 ./include 
@@ -18,5 +18,6 @@ include_directories(
 add_executable(stepworks main.cpp)
 
 add_subdirectory(test)
+add_subdirectory(samples)
 
 install(TARGETS stepworks RUNTIME DESTINATION bin)

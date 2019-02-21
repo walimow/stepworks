@@ -3,6 +3,7 @@
 #include <foab.first/isvalid.hpp>
 #include <xtypes.hpp>
 #include <util/optional_type.hpp>
+#include <util/optional.hpp>
 
 using stepworks::types::var_t;
 using stepworks::types::_asserted;
@@ -34,6 +35,33 @@ struct wforward {
 };
 
 
+
+/*
+template<typename Ta,
+         template<typename ...>typename  Src
+         >
+auto  _go_ ( wforward<Ta, Src >&& src, const Ta& a )
+{
+   
+    using W= typename wforward<Ta, Src  >::wfoab;
+    
+    wforward<Ta, Src > s =std::move(src);
+    if (s )
+    {
+        
+        
+        return wforward<Ta, Src  >
+        {
+            stepworks::application::apply( 
+                a, 
+                W { std::move(s._dest)},
+                []( const Ta& a,W&& w_)->W{ auto w=std::move(w_); w._dest.push_back(a); return std::move(w);}  )._dest
+        };
+        
+    }
+    return   std::move(s) ;
+}
+*/
 
 
 template<typename Ta,

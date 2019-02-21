@@ -1,7 +1,6 @@
 #include "gtest/gtest.h"
 #include <rw/wstream.hpp>
 #include <rw/wforward.hpp>
-#include <rw/wstream.hpp>
 
 #include <util/optional_type.hpp>
 

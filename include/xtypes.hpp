@@ -16,25 +16,52 @@ namespace stepworks {
 namespace types {
 
 
-//Fab::fi(const f1)
-
+//Fab::fi(const f1)    not useful, Ta may be non-copyable to offtype , (streams...)
+/*
 template<typename Ta, typename Tb, typename Fab>
 auto apply( const var_t_type<Ta> & a0,  const Fab& f)
--> var_t_type<Ta,Tb> {                                             //b or defectious a
+-> var_t_type<Tb,Ta> {                                             //b or defectious a
     struct vs {
         const Fab& f;
-        auto operator() (  const Ta& s)const -> var_t_type<Ta,Tb> {
+        auto operator() (  const Ta& s)const
+        -> var_t_type<Tb,Ta> 
+        {
             using T = arg_1_t< typename PM_traits<decltype(&Fab::f1)>::member_type>;
             return   f.f1(             std::forward<T> (s )   );
         }
-        auto operator() ( const off_type<Ta> & s)const -> var_t_type<Ta,Tb> {
-            return    std::move(s);
+        auto operator() ( const off_type<Ta> & s)const
+        -> var_t_type<Tb,Ta> 
+        {
+            var_t_type<Tb,Ta> r{s};
+            return    r  ; //var_t_type<Tb,Ta>{s};//s!
         }
     } ;
     return    std::visit(vs{f},   a0 );
 }
+*/
 
+///applicationtype: gets maybe a, returns (sure) b or the offtype(a)   (rara case?)
 
+template<typename Ta, typename Tb, typename Fab>
+auto apply(  var_t_type<Ta> && a0,  const Fab& f)
+-> var_t_type<Tb,Ta> {                                             //b or defectious a
+    struct vs {
+        const Fab& f;
+        auto operator() (   Ta&& s)const
+        -> var_t_type<Tb,Ta> 
+        {
+            using T = arg_1_t< typename PM_traits<decltype(&Fab::f1)>::member_type>;
+            return   f.f1(             std::forward<T> (s )   );
+        }
+        auto operator() (  off_type<Ta> && s)const
+        -> var_t_type<Tb,Ta> 
+        {
+           // var_t_type<Tb,Ta> r{s};
+            return    std::move(s)  ; //var_t_type<Tb,Ta>{s};//s!
+        }
+    } ;
+    return    std::visit(vs{f},   std::move(a0) );
+}
 
 template<typename Ta, typename Tb, typename Fab>
 auto apply(   const var_t_info<Ta>&   a0, const Fab& f)
@@ -58,6 +85,8 @@ auto apply(   const var_t_info<Ta>&   a0, const Fab& f)
 ////////////
 
 
+
+
 template<typename Ta, typename Tb,  typename Fab>
 auto apply(const   var_t< Ta>& a0, const Fab& f)
 ->var_t<Tb> {
@@ -71,6 +100,10 @@ auto apply(const   var_t< Ta>& a0, const Fab& f)
 
 }
 
+////
+
+
+////
 
 ///todo apply_optional
 
@@ -89,6 +122,17 @@ auto apply_optional_void(const var_t< Ta>& a0, const Fab0& f)->Tb {
     else
         return f.f0();
 }
+
+/*
+template<typename Ta, typename Tb,  typename Fab0>
+auto apply_optional_void(const var_t< Ta>& a0,  Fab0&& f)->Tb {
+    auto a0_ = std::move(a0);
+    if (a0_)
+        return std::move(f).f1(*a0_);
+    else
+        return std::move(f).f0();
+}
+*/
 
 
 template<typename Ta, typename Tb,  typename Fab0>

@@ -17,5 +17,4 @@ struct is_valid{
 };
 
     
-    
 }

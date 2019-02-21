@@ -6,6 +6,7 @@
 #include <util/optional_type.hpp>
 
 #include <istream>
+#include <fstream>
 
 using stepworks::types::var_t;
 
@@ -46,7 +47,18 @@ template<typename Ta,
 auto make_rstream(Stream&& s ) {
     return rstream<Ta,Stream, Form  >{ std::move(s)  };
 }   
+
+template< typename  Stream = std:: istream
+         >
+auto make_rstream0( const std::string& path )->stepworks::types::var_t_type<std::ifstream> {
+     auto&& ifs=std::ifstream (path , std::ifstream::in);
     
+    if (ifs.fail())
+        return stepworks::types::off_type<std::ifstream>{ std::move(ifs)}; 
+    else
+        return   std::move(ifs);
+    };
+   
     
     
 }
