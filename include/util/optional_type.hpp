@@ -22,6 +22,13 @@ struct off_type{
 };
 
 
+template <typename Ta>
+struct off_type_num{
+    Ta _data;
+    int _num;
+};
+
+
 template <typename Ta, typename Tx=Ta>    //may contain an instance of another or the same type
 using var_t_type =std::variant< off_type<Tx> ,Ta>;
 

@@ -4,6 +4,7 @@
 #include <set>
 #include <forward_list>
 #include <map>
+#include <list>
 #include <util/optional_type.hpp>
 
 using stepworks::types::var_t;
@@ -43,5 +44,30 @@ namespace stepworks::primary{
        return make_pair(std::move(s), std::move(r));
     }
     
+    template <typename Ta>
+    auto _f_ (const std::list<Ta>& l){   return l.begin();}
+    
+    template <typename Ta>
+    auto _f_ (std::list<Ta>&& l){   return l.begin();}
+    
+    template <typename Ta>
+    auto _f_ (const std::list<Ta>& l, typename  std::list<Ta>::iterator it){ 
+        return 
+            it !=   l.end() ?   (var_t<Ta>) ( *it ):  var_t<Ta>{}; 
+    }
+    
+    template <typename Ta>
+    auto _f_ (std::list<Ta>&& l, typename std::list<Ta>::iterator it){
+          return 
+            it !=   l.end() ?   (var_t<Ta>) ( *it ):  var_t<Ta>{} ;
+   }
+
+   
+    
+    
+    template <typename Ta, template <typename...> typename R, typename Tb=Ta, template <typename...> typename W>
+    auto _f_ (const  R<Ta>& r, Tb(*fab)(const Ta&), W<Tb>&& w=W<Tb>{}){
+       // fab(  )
+    }
     
 }

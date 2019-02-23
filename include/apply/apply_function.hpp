@@ -123,4 +123,10 @@ auto _( R(*f)(const A&),  R(*df)( const Else&) )
 }
 
 
+///?here?
+/*
+template <typename Ta, template<typename...> R, typename Tb=ta>
+struct apply<> 
+*/
+
 }
