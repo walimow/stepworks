@@ -2,16 +2,17 @@
 
 #include "apply_function.hpp"
 #include <util/optional.hpp>
+#include <rw/wforward.hpp>
 
 using stepworks::types::var_t;
 
 using stepworks::types::var_type;
 
+namespace stepworks::application {
+
 //simple
 
 template <
-//        template <typename > typename Form,
-//        typename Ta, template <typename ...> typename Reader, 
    typename Ta,
         typename  Tb, template <typename ...> typename Writer>
 struct apply< Writer<Tb>,Tb(*)(const Ta&) > {
@@ -19,31 +20,71 @@ struct apply< Writer<Tb>,Tb(*)(const Ta&) > {
     F _f;
     
     
-    Writer<Tb>  operator()( Reader<Ta, var_t>&& r, Writer<Tb>&& w  ) {
+    template <template <typename ...> typename Reader>
+    Writer<Tb>  operator()( Reader<Ta, var_t<Ta>>&& r, Writer<Tb>&& w  ) {
         auto ra = _go_(r);
-        return (ra.second) ?  apply( _go_   std::move(w),   )
+        return (ra.second) ?   apply{ _f } ( std::move( *ra.second) ,   _go_ (  std::move(w)) )  : 
+            std::move(w);
         
     }
     
-    
-    
-    
-    /*
-
-      template  < template <typename...> typename Form>      ///clang-problem
-  //  template  < template <typename,typename> typename Form>
-    constexpr auto operator()(const Form<Else,A>& a0)const {
+    template <template <typename ...> typename Reader,  template<typename, typename >typename  Form, typename Else >
+    Writer<Tb>  operator()( Reader<Ta, Form<Ta,Else>>&& r, Writer<Tb>&& w  ) {
+        auto ra = _go_(r);
         struct vis {
+            
             const apply& _here;
-            auto operator()(const A&a)const {
-                return _here._f(a);
+            auto operator()(const Ta&a, Reader<Ta, Form<Ta, Else>>&& r, Writer<Tb>&& w )const {
+                return  apply{ _here._f } ( std::move( a) , std::move(w));  
             }
-            auto operator()(const Else&a)const {
+            auto operator()(const Else&a, Reader<Ta, Form<Ta, Else>>&& r, Writer<Tb>&& w)const {
 
-                return  _here._else(a);
+                return    std::move(w) ;
             }
         };
-        return std::visit(vis {*this}, a0);
-    };
-    */
+        return std::visit(vis {*this}, ra.second ,ra.first, w);
+    }  
+    
 };
+
+//with predicate
+
+
+template <
+   typename Ta,
+        typename  Tb, template <typename ...> typename Writer>
+struct apply< Writer<Tb>,Tb(*)(const Ta&) , bool(const Ta&)> {
+    using F = Tb(*)(const Ta&);
+    F _f;
+    bool (*fpredicate) (const Ta&);
+    
+    template <template <typename ...> typename Reader>
+    Writer<Tb>  operator()( Reader<Ta, var_t<Ta>>&& r, Writer<Tb>&& w  ) {
+        auto ra = _go_(r);
+        return _go_   (ra.second) ?   apply( std::move(ra.first),  _go_(w, ra.second, fpredicate)) 
+        :
+        std::move(w);
+    }
+    
+    template <template <typename ...> typename Reader,  template<typename, typename >typename  Form, typename Else >
+    Writer<Tb>  operator()( Reader<Ta, Form<Ta,Else>>&& r, Writer<Tb>&& w  ) {
+        auto ra = _go_(r);
+        struct vis {
+            
+            const apply& _here;
+            auto operator()(const Ta&a, Reader<Ta, Form<Ta, Else>>&& r, Writer<Tb>&& w )const {
+                
+                //return  apply{ _here._f } ( std::move( a) , std::move(w));  
+                 return apply ( std::move(r),  _go_(w, a,  _here.fpredicate)) ;
+                
+            }
+            auto operator()(const Else&a, Reader<Ta, Form<Ta, Else>>&& r, Writer<Tb>&& w)const {
+
+                return    std::move(w) ;
+            }
+        };
+        return std::visit(vis {*this}, ra.second ,ra.first, w);
+    }      
+};
+
+}

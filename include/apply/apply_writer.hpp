@@ -81,6 +81,7 @@ struct apply<std::map<K,Ta>&&,const Ta&> {
 };
 
 
+
 template <typename K,typename Ta, template<typename...>typename L >
 struct apply<std::map<K,L<Ta>>&&,const Ta&> {
     std::map<K,L<Ta>>&& _w;
@@ -117,10 +118,10 @@ auto _( W<K,Ta>&& w )
 */
 
 
-template < typename K,typename Ta, template <typename> typename L>
+template < typename K,typename Ta, template <typename...> typename L>
 auto _ ( std::map<K, L<Ta>>&& w )
 {
-    return apply<std::map<K, L<Ta>>&&, const Ta& > {std::move ( w ) };
+    return apply<std::map<K,   L<Ta>>&&, const Ta& > {std::move ( w ) };
 }
 
 
