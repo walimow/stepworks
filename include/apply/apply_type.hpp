@@ -2,42 +2,22 @@
 #pragma once
 
 
-#include <util/optional_type.hpp>
 
-#include <type_traits>
-//#include  <utility>
+#include <core/optional_type.hpp>
+
+#include <core/ftypetraits.hpp>
+
+#include "apply_abstact.hpp"
 
 using stepworks::types::var_t;
 
+
+using stepworks::has_member_f0;
+using stepworks::has_member_f1t;
+using stepworks::has_member_ft;
+
+
 namespace stepworks::application {
-
-
-template <typename T, typename = void>
-struct has_member_f0
-    : std::false_type
-{};
-
-template <typename T>
-struct has_member_f0<T,
-       std::void_t<decltype(std::declval<T>().f0())>>
-       : std::true_type
-       {};
-
-
-
-template <typename T, typename = void>
-struct has_member_ft
-    : std::false_type
-{};
-
-
-template <typename T>
-struct has_member_ft<T,
-       std::void_t<decltype(std::declval<T>().Ft(1))>>
-       : std::true_type
-       {};
-
-
 
 
 ///f-struct
@@ -50,20 +30,19 @@ struct apply <Ta,F,R> {
         return _f.f1(a);
     }
 
+    
     constexpr auto operator()(const var_t<Ta>& a0)->R {
-        if (a0) {
+        if (!a0) {
             if constexpr(has_member_ft<F>()) {
-                return _f._ft(*a0);
+                return _f.ft(*a0);  //??
             }
             else if constexpr(has_member_f0<F>()) {
-                return _f._f0(*a0);
+                return _f.f0();
             }
-            else
-                _f(*a0);
         }
         else {
-            if constexpr(has_member_f0<F>()) {
-                return _f._f0();
+            if constexpr(has_member_f1t<F,Ta>()) {
+                return _f.f1(*a0);
             }
             else
                return  _f(*a0);
@@ -79,7 +58,7 @@ struct apply <Ta,F,R> {
                     return here._f._ft(a);
                 }
                 else if constexpr(has_member_f0<F>()) {
-                    return here._f._f0(a);
+                    return here._f.f0(a);
                 }
                 else
                     here._f(a);
@@ -90,7 +69,7 @@ struct apply <Ta,F,R> {
                     return here._f._ft(a);
                 }
                 if constexpr(has_member_f0<F>()) {
-                    return here._f._f0();
+                    return here._f.f0();
                 }
                 else
                    return  here._f(a);

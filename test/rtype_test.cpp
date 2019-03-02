@@ -4,7 +4,7 @@
 #include <rw/select.hpp>
 #include <rw/rstream.hpp>
 
-#include <util/optional.hpp>
+#include <core/optional.hpp>
 
 #include  <list>
 #include <sstream>

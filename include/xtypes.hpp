@@ -9,8 +9,9 @@
 #include <foab.hpp>
 
 #include <util/argtype.hpp>
-#include <util/offtype.hpp>
-#include <util/optional_type.hpp>
+#include <core/offtype.hpp>
+
+#include <core/optional_type.hpp>
 
 namespace stepworks {
 namespace types {

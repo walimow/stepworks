@@ -1,7 +1,7 @@
 #pragma once
 
-#include <util/optional_type.hpp>
-#include <util/optional.hpp>
+#include <core/optional_type.hpp>
+#include <core/optional.hpp>
 
 namespace stepworks::process{
 

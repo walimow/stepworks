@@ -2,8 +2,8 @@
 
 #include <foab.first/isvalid.hpp>
 #include <xtypes.hpp>
-#include <util/optional_type.hpp>
-#include <util/optional.hpp>
+#include <core/optional_type.hpp>
+#include <core/optional.hpp>
 
 #include <apply.hpp>
 

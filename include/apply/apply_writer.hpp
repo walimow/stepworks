@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <util/optional_type.hpp>
+#include <core/optional_type.hpp>
 
 #include <rw/wforward.hpp>
 #include <rw/winsert.hpp>
@@ -9,6 +9,10 @@
 #include <prim/wcontainer.hpp>
 
 #include <type_traits>
+#include <core/ftypetraits.hpp>
+
+#include "apply_abstact.hpp"
+#include "apply_type.hpp"
 //#include  <utility>
 
 using stepworks::types::var_t;
@@ -22,15 +26,24 @@ namespace stepworks::application
 {
 
 
+//template <typename ...> struct ___apply;
+
 ///apply writer:    a, w&&->w  (skip offs)
-template <typename Ta, template<typename...>typename W >
-struct apply<W<Ta> ( W<Ta>&&, const Ta& ) > {
+template <template<typename...>typename W, typename Ta >
+struct apply <  W<Ta> ( W<Ta>&&, const Ta& ) > {
     W<Ta>&& _w;
-    auto operator () ( const Ta& a )
+
+    auto operator () ( const Ta& a )const
     {
-        return _f_ ( std::move ( _w ),  a );
+        if constexpr ( has_member_f1t< decltype ( _w ), Ta >() ) {
+            return _w.f1 (  a  );
+        } else
+            return    _f_ ( std::move ( _w ),  a );
     }
-    auto operator () ( const var_t<Ta>& a )->W<Ta>
+
+    ///TODO s. o.
+
+    auto operator () ( const var_t<Ta>& a )const->W<Ta>
     {
         if ( a )
         return _go_ ( std::move ( _w ),  *a );
@@ -38,10 +51,33 @@ struct apply<W<Ta> ( W<Ta>&&, const Ta& ) > {
             return std::move ( _w );
         }
 
-        template <template<typename>typename Form >
-auto operator () ( const  Form<Ta>& a )
+        template <template<typename...>typename Form, typename Else >
+auto operator () ( const  Form<Ta, Else>& a )const
     {
         return _go_ ( std::move ( _w ),  a );
+    }
+///
+
+    auto operator () ( Ta&& a )const
+    {
+        if constexpr ( has_member_f1t< decltype ( _w ), Ta >() ) {
+            return _w.f1 ( std::move( a)  );
+
+        } else
+            return _f_ ( std::move ( _w ),  std::move ( a ) );
+    }
+    auto operator () ( var_t<Ta>&& a )const ->W<Ta>
+    {
+        if ( a )
+        return _go_ ( std::move ( _w ), std::move ( *a ) );
+        else
+            return std::move ( _w );
+        }
+
+        template <template<typename...>typename Form, typename Else >
+auto operator () ( Form<Ta, Else>&& a )
+    {
+        return _go_ ( std::move ( _w ), std::move ( a ) );
     }
 };
 
@@ -50,7 +86,7 @@ auto operator () ( const  Form<Ta>& a )
 template <template<typename...>typename W, typename Ta>
 auto _ ( W<Ta>&& w )
 {
-    return apply< W<Ta> ( W<Ta>&&, const Ta& ) > {std::move ( w ) };
+    return apply  <  W<Ta> ( W<Ta>&&, const Ta& ) >  { std::move ( w )  };
 }
 
 
@@ -85,37 +121,31 @@ struct apply<std::map<K,Ta>&&,const Ta&> {
 template <typename K,typename Ta, template<typename...>typename L >
 struct apply<std::map<K,L<Ta>>&&,const Ta&> {
     std::map<K,L<Ta>>&& _w;
-
-    auto operator () ( const std::pair<K,Ta>& a )
+    auto operator () ( const std::pair<K,Ta>& a ) const ->std::map<K, L< Ta> >
     {
-        return _f_ ( std::move ( _w ),  a );
-    }
-    auto operator () ( const var_t<std::pair<K, Ta>>& a )->std::map<K, L< Ta> >
-    {
-        if ( a ){
-              auto & l =   std::move ( _w )[(*a).first];
-              _f_ (l,(*a).second );
-              return std::move ( _w );
-        }
-        //    return _f_ ( std::move ( _w ),  *a );
-        else
-            return std::move ( _w );
+        auto & l = _w[a.first];
+        _f_ ( l, a.second );
+        return std::move ( _w );
     }
 
     template <template<typename>typename Form >
-    auto operator () ( const  Form<std::pair< K,Ta >>& a ) ->std::map<K, L<Ta>>
+    auto operator () ( const  Form<std::pair< K,Ta >>& a ) const  ->std::map<K, L<Ta>>
     {
-        return _go_ ( std::move ( _w ),  a );
+        return apply<
+               std::pair< K,Ta >,
+               apply<std::map<K,L<Ta>>&&,const Ta&>,
+               std::map<K,L<Ta>>
+               > {*this} ( a );
+    }
+    auto f0 () const
+    {
+        return std::move ( _w );
+    }
+    auto f1 ( const std::pair<K,Ta>& a ) const
+    {
+        return  _f_ ( std::move ( _w ),  a );
     }
 };
-
-/*
-template <template<typename, typename>typename W, typename K,typename Ta>
-auto _( W<K,Ta>&& w )
-{
-    return apply< W<K, Ta>(W<K, Ta>&&, const Ta&) > {std::move(w)};
-}
-*/
 
 
 template < typename K,typename Ta, template <typename...> typename L>
@@ -123,6 +153,7 @@ auto _ ( std::map<K, L<Ta>>&& w )
 {
     return apply<std::map<K,   L<Ta>>&&, const Ta& > {std::move ( w ) };
 }
+
 
 
 

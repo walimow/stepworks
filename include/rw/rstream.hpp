@@ -3,7 +3,7 @@
 
 #include <foab.first/isvalid.hpp>
 #include <xtypes.hpp>
-#include <util/optional_type.hpp>
+#include <core/optional_type.hpp>
 
 #include <istream>
 #include <fstream>
@@ -57,8 +57,25 @@ auto make_rstream0( const std::string& path )->stepworks::types::var_t_type<std:
         return stepworks::types::off_type<std::ifstream>{ std::move(ifs)}; 
     else
         return   std::move(ifs);
-    };
-   
-    
-    
+    };    
 }
+/*
+template<typename Ta,
+         typename  Stream = std:: istream,
+         template <typename ...>typename  Dest,
+         template <typename > typename Form = var_t>
+struct apply <Ta, Stream, Dest<Ta>> {
+    Stream &&  _ist;
+    //Dest<Ta>&&  _dest;
+    auto operator()(Dest<Ta> &&  d)  ->Dest<Ta>{
+        if (_ist.bad())
+            return std::move(d);
+        Ta a;
+        _ist>> a;
+        if (_ist.fail())
+            return std::move(d);
+        else
+            return apply{ std::move(_ist) }(std::move(dest.f1(a)) ) ;   
+    }
+};
+*/

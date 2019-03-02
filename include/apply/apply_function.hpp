@@ -1,6 +1,6 @@
 #pragma once
 
-#include <util/optional_type.hpp>
+#include <core/optional_type.hpp>
 
 #include <type_traits>
 //#include  <utility>
@@ -11,7 +11,7 @@ using stepworks::types::var_t;
 namespace stepworks::application {
 
 
-template <typename...> struct apply;
+//template <typename...> struct apply;
 
 template <typename R, typename A>
 struct apply<R(const A)> {
@@ -56,9 +56,12 @@ auto _( R(*f)(const A&), const R& df )
 
 template <typename R, typename A>
 struct apply<R ( const var_t<A>&), R()> {
-    using F = R(*)(const A&);
-    F _f;
-    R(*_default)() ;
+    using Fnc = R(*)(const A&);
+    Fnc _f;
+    
+    using Fnc0 = R(*)();
+    Fnc0 _default ;
+  
     constexpr auto operator()(const var_t<A> &a)const {
         assert(_f);
         if (a)
@@ -82,6 +85,7 @@ struct apply<R ( const var_t<A>&), R()> {
         return std::visit(vis {*this}, a0);
     }
 };
+
 
 
 template <typename R, typename A>

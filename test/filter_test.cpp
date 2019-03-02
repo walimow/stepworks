@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <foab.first/filter.hpp>
-#include <util/optional.hpp>
+#include <core/optional.hpp>
 
 namespace filtertest{
 

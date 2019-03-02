@@ -3,7 +3,7 @@
 
 #include <foab.first/isvalid.hpp>
 #include <xtypes.hpp>
-#include <util/optional_type.hpp>
+#include <core/optional_type.hpp>
 #include <algorithm>
 
 #include <apply.hpp>

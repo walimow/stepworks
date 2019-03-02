@@ -5,14 +5,13 @@
 
 #include <foab.first/isvalid.hpp>
 #include <xtypes.hpp>
-#include <util/optional_type.hpp>
+#include <core/optional_type.hpp>
 
 using stepworks::types::var_t;
 
 namespace stepworks {
 
 //  template <typename ...>   struct fw_t;
-
 
 template <typename Ta,
           template <typename... > typename Src,

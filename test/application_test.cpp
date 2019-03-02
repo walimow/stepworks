@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include <util/optional_type.hpp>
+#include <core/optional_type.hpp>
 
 #include  <apply.hpp>
 
@@ -70,12 +70,13 @@ TEST ( applcation_test_case, writer )
     for (auto i : {
                 6,3,77,1,1,-1
             }) {
-        _( std::move(w))(i);
+       w= _( std::move(w))(i);
      
     }
     
     //std::set<int> w;
     auto sz=w.size();
+  //  EXPECT_EQ(sz,5);
     std::cout<<"\t***count "<<sz<<"\n";
     for (const auto& i: w){
         std::cout<< i<<"\t*** ";
@@ -99,4 +100,5 @@ TEST ( applcation_test_case, handled )
     auto r =  _(f1,ffail)(x0);
     EXPECT_EQ(r, -420);
 }
+
 

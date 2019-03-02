@@ -1,117 +1,72 @@
-
-#include <rw/rforward.hpp>
-#include <rw/rforwardt.hpp>
-#include <rw/wstream.hpp>
-#include <process/proc.hpp>
-
-
 #include <iostream>
-#include <list>
-#include <vector>
-#include <forward_list>
+#include <utility>
+#include <string>
+#include <variant>
 
-void test1() {
-    bool b=false;
-    bool b1=false;
-    {
+#include <core/optional_type.hpp>
+#include <typeinfo>
 
-        auto li = stepworks::make_forward_readeable(std::list<int> {});
-        b = li._it ==li._src.end();
+#include <core/ftypetraits.hpp>
 
+using stepworks::types::var_tx;
 
-    }
-    {
+using namespace std;
 
-        auto li = stepworks::make_forward_readeable(std::list<int> {1});
-        b = li._it ==li._src.end();
-
-        auto ll =  stepworks::_go_( std::move(li) );
-        auto* pli1 = & ll.second;
-        //const auto& li1 =  stepworks::_go_( std::move(li) ).second;
-        b = pli1->_it ==pli1->_src.end();
-        b1 = li._it ==li._src.end();
-/*
-        void* p0 =&pli1->_it;
-        void* p1 =&li._it;
-        void* p2 =&pli1->_src;
-        void* p3 =&li._src;
-        std::cout<<"";
-        */
-        /**/
-        ////
-        /*
-         auto internal_peek() -> typename decltype(data)::iterator
-                       //  ^^^^^ here
-        {
-        if (m_activeStackSize) // peek from stack
-        {
-        typename decltype(data)::iterator itr = data.end();
-        // ^^^^^ and here
-
-         */
+struct proc{};
 
 
-    }
-    {
-        auto li = stepworks::make_forward_readeable(std::list<int> {1,2,42});
+struct f{};
 
-//   stepworks::process::proc { stepworks::make_forward_readeable(std::list<int>{1,2,42})  }( stepworks::wtype::wstream<int,std::ostream>{ std::move(  std::cout)  } );
 
-        auto  fwl = stepworks::make_forward_readeable(  std::list<int> {1,2,42});
-        /*
-          auto res =    stepworks::process::perform_process<int>( stepworks::make_forward_readeable(  std::list<int>{1,2,42}),
-                                                            stepworks::wstream<int, std::ostream>{ std::move( std::cout)   } );
-        */
-    }
+struct s {
+    int x=42;
+    friend proc  operator >> (proc &&ip,  s &c);
+    friend proc  operator << (proc &&op,  const s &c);
+    int f1(const int& x){  return 42;}
+};
+
+
+
+
+template <typename Ta> 
+struct strm{
+    
+};
+
+
+proc  operator << (proc &&out, const s &c)
+{
+//out << c.x;
+    return out;
 }
 
-using stepworks::make_forward_readeable;
 
-void test() {
-    bool test=false;
-    {
-    auto src = stepworks::make_forward_readeable(std::list<int> {});
-    {
-        test = src._it ==src._src.end();
-        std::cout<< "\n before: "<<  std::boolalpha <<test;
 
-        auto res = make_forward_readeable(std::move(src._src), std::move( src._it)) ;
-        test = res._it ==res._src.end();
-        std::cout<< "\n result: "<<  test;
-        std::cout<< "\n b2r: "<< ( res._it ==src._src.end());
-        std::cout<< "\n r2b: "<< ( src._it ==res._src.end())<<"\n";
-    }
-    }
+proc  operator >> (proc &&in,  s &c)
+{
+ //   in >> c.x;
+    return in;
 }
 
-void test_rt() {
-    bool test=false;
-    {
-    auto&& src = stepworks::make_forward_readeable_t(std::list<int> {});
-     {
-        test = (bool)src; //src._it == std::move(src._src).end();
-        std::cout<< "\n before: "<<  std::boolalpha <<test;
 
-        auto&& res = stepworks::make_forward_readeable_t(std::move(src._src), std::move( src._it)) ;
-        test = res;  // _it ==res._src.end();
-        std::cout<< "\n result: "<<  test;
-     }
-    }
-    {
-    auto&& src = stepworks::make_forward_readeable_t(std::list<int> {1,2,3});
-     {
-        test = (bool)src; //src._it == std::move(src._src).end();
-        std::cout<< "\n before: "<<  std::boolalpha <<test;
-
-        auto&& res = stepworks::make_forward_readeable_t(std::move(src._src), std::move( src._it)) ;
-        test = res;  // _it ==res._src.end();
-        std::cout<< "\n result: "<<  test;
-     }
-    }
-}
 
 int main ( int argc, char **argv )
 {
-    test_rt();
+
+    bool bt1= stepworks::has_member_f1t < s, int >();
+    bool bf1= stepworks::has_member_f1t < s, std::string >();
+    bool bf2= stepworks::has_member_f1t < strm<double>, std::string >();
+    
+    s c1,c2;
+
+    proc p;
+    
+    std::move(p)>>c1>>c2;
+    
+    std::move(p)<<c1;
+    //    cin >> c1;
+
+//    cout << c1;
+
     return 0;
 }

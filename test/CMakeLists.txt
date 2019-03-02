@@ -17,6 +17,7 @@ include_directories(${GTEST_INCLUDE_DIR})
 
 add_executable(runUnitTests
 
+
 foab_test.cpp
 xT_test.cpp         
 
@@ -38,8 +39,10 @@ match_wtex_test.cpp
 
 application_test.cpp
 
+rwprimitiv_test.cpp
+process_stream_test.cpp
 
-
+var_test.cpp                                  
 
 )
 

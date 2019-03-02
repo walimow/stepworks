@@ -1,8 +1,9 @@
 #pragma once
 
 #include <foab.hpp>
-#include <util/optional_type.hpp>
-#include <util/offtype.hpp>
+#include <core/optional_type.hpp>
+#include <core/offtype.hpp>
+
 
 #include <util/argtype.hpp>
 

@@ -8,40 +8,42 @@
 #include <cwctype>
 #include <stdexcept>
 
-#include <algorithm> 
+#include <algorithm>
 
 #include <locale>
 
 using namespace std;
 
-namespace stepworks::util{
+///thanks to /.
+
+namespace stepworks::util {
 
 void to_upper(basic_string<char>& s) {
-   for (basic_string<char>::iterator p = s.begin();
-        p != s.end(); ++p) {
-      *p = toupper(*p); // toupper is for char
-   }
+    for (basic_string<char>::iterator p = s.begin();
+            p != s.end(); ++p) {
+        *p = toupper(*p); // toupper is for char
+    }
 }
 
 void to_upper(basic_string<wchar_t>& s) {
-   for (basic_string<wchar_t>::iterator p = s.begin();
-        p != s.end(); ++p) {
-      *p = towupper(*p); // towupper is for wchar_t
-   }
+    for (basic_string<wchar_t>::iterator p = s.begin();
+            p != s.end(); ++p) {
+        *p = towupper(*p); // towupper is for wchar_t
+    }
 }
 
 void to_lower(basic_string<char>& s) {
-   for (basic_string<char>::iterator p = s.begin();
-        p != s.end(); ++p) {
-      *p = tolower(*p);
-   }
+    for (basic_string<char>::iterator p = s.begin();
+            p != s.end(); ++p) {
+        *p = tolower(*p);
+    }
 }
 
 void to_lower(basic_string<wchar_t>& s) {
-   for (basic_string<wchar_t>::iterator p = s.begin();
-        p != s.end(); ++p) {
-      *p = towlower(*p);
-   }
+    for (basic_string<wchar_t>::iterator p = s.begin();
+            p != s.end(); ++p) {
+        *p = towlower(*p);
+    }
 }
 /////////
 

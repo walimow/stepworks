@@ -2,7 +2,7 @@
 #include <rw/wstream.hpp>
 #include <rw/wforward.hpp>
 
-#include <util/optional_type.hpp>
+#include <core/optional_type.hpp>
 
 #include <iostream>
 #include <list>
