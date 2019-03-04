@@ -1,12 +1,14 @@
 #include <rw/rstream.hpp>
 #include <rw/wstream.hpp>
 
-
+#include <core/valid.hpp>
 #include <core/offtype.hpp>
-
 #include <core/optional_type.hpp>
 
-#include <xtypes.hpp>
+#include <rw/index.hpp>
+#include <rw/rstream.hpp>
+
+//#include <xtypes.hpp>
 
 #include <iostream>
 #include <map>
@@ -19,15 +21,10 @@
 #include <boost/filesystem.hpp>
 
 #include  <util/lines_to_set.hpp>
-#include <core/valid.hpp>
-#include  <rw/index.hpp>
-#include <rw/rstream.hpp>
-
-
-#include "wordindex.h"
 
 #include <apply/apply_writer.hpp>
 
+#include "wordindex.h"
 
 using stepworks::types::var_t_info;
 
@@ -94,15 +91,10 @@ int main ( int argc, char **argv )
         {
 
             using TN =  var_type<   decltype(r0) >::_Type;
-
-            //   auto  rr=    _asserted< ifstream >  ( r0);
             auto  rr=    _asserted<TN>  ( std::move(r0));
-            //     auto&  rr=    _asserted <TN&> ( r0);
+            
             wordindex::file2lines< TN> wx{ dict};
-            auto result =   stepworks::application::_
-                            (
-                                std::move(wx)
-                            ) ( std::move(rr) );
+            auto result =  stepworks::application::_ ( std::move(wx) ) ( std::move(rr) );
 
             int sz =wordindex::trace_dict(result);                
             std::cout<<   "\nsz: "<< sz<<"\n";

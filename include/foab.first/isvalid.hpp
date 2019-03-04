@@ -12,8 +12,8 @@ struct is_valid{
 
   constexpr  bool f0()const {         return false;    }
 
-  //
-  //constexpr  bool ft0()const {         return false;    }
+  constexpr bool operator()(const Ta&) const {         return true;    }
+  
 };
 
     

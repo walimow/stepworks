@@ -221,7 +221,7 @@ using     stepworks::types::_asserted;
                                                 ( _f(ar.first, nullptr) ) )
                 return proc_controlled{ std::move(ar.second), _f}( _go_( std::move( w), ar.first ) );
             else
-                return make_pair(r, w);
+                return make_pair(std::move(r), std::move(w));
         }
         
     };

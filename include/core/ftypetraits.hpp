@@ -58,6 +58,28 @@ struct has_member_ft<T,
        : std::true_type
        {};
 
+       
+template <typename T, typename = void>
+struct has_operator_ft
+    : std::false_type
+{};
+
+
+
+template <typename T, typename Arg, typename = void>
+struct has_operator_t
+    : std::false_type
+{};
+
+
+template <typename T, typename Arg>
+struct has_operator_t<T,Arg,
+       std::void_t<decltype(std::declval<T>().operator()( std::declval<Arg>()))>>
+       : std::true_type
+       {};
+
+
+
 
 
     

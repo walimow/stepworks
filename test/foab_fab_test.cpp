@@ -4,11 +4,16 @@
 #include <core/optional_type.hpp>
 
 #include <optional>
+#include <apply.hpp>
+
 
 using  stepworks::fab;
 using  stepworks::foab;
 using  stepworks::make_fab;
 using  stepworks::make_foab;
+
+using stepworks::application::_;
+using stepworks::application::_x;
 
 
 struct xplus {
@@ -39,7 +44,6 @@ TEST(foab_fab_test_case,  foabfab_0) {
 TEST(foab_fab_test_case,  foabfab_1) {
       
     using stepworks::first::is_valid;
-    using stepworks::types::apply_optional_void;
     
     
     foab<xplus> plus7{xplus{7}};
@@ -55,7 +59,7 @@ TEST(foab_fab_test_case,  foabfab_1) {
     
     auto rfail=ff7.f0();
     
-    auto b= apply_optional_void<int,bool>( rfail, is_valid<int>());
+    auto b=  _x( is_valid<int>())( rfail);
     
     EXPECT_EQ( b, false );
     
@@ -64,7 +68,7 @@ TEST(foab_fab_test_case,  foabfab_1) {
 
 TEST(foab_fab_test_case,  foabfab_info) {
     using stepworks::first::is_valid;
-    using stepworks::types::apply_optional_void;
+ //   using stepworks::types::apply_optional_void;
           
     foab<xplus> plus7{xplus{7}};
     
@@ -81,7 +85,7 @@ TEST(foab_fab_test_case,  foabfab_info) {
 
 TEST(foab_fab_test_case,  foabfab_add7) {
     
-    using stepworks::types::apply_optional_void;
+   // using stepworks::types::apply_optional_void;
       
     auto foab1 =  make_foab<const int&,int>(
         []( const  int& a)->int{ return a+7;} 
@@ -107,7 +111,7 @@ TEST(foab_fab_test_case,  foabfab_add7) {
 
 TEST(foab_fab_test_case,  foabfab_add7b) {
     
-    using stepworks::types::apply_optional_void;
+   // using stepworks::types::apply_optional_void;
     
     auto ff7= make_fab( //[](  
         make_foab<const int&,int>(

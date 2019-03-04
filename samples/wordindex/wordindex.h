@@ -1,15 +1,5 @@
 #pragma once
 
-#include <rw/rstream.hpp>
-#include <rw/wstream.hpp>
-
-
-#include <core/offtype.hpp>
-
-#include <core/optional_type.hpp>
-
-#include <xtypes.hpp>
-
 #include <iostream>
 #include <map>
 #include <string>
@@ -20,14 +10,6 @@
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
 
-#include <rw/index.hpp>
-
-#include <rw/rstream.hpp>
-
-#include <util/strutil.hpp>
-
-#include <functional>
-#include <prim/wcontainer.hpp>
 
 using wdict = stepworks::wtype::dict_index<string, unsigned int>;
 
@@ -67,8 +49,8 @@ struct line_words {
         }
         if ( switch_pos < k && is_onWord  && k-switch_pos>=min_sz){ //remain
             const auto& str= string(ptr+switch_pos, k-switch_pos);
-//            _on_word (  line, std::string(  std::string_view ( ptr+switch_pos, k-switch_pos ) )) ;   //todo
-            _on_word (  line, str.c_str()) ;   //todo
+//            _on_word (  line, std::string(  std::string_view ( ptr+switch_pos, k-switch_pos ) )) ;   //?
+            _on_word (  line, str.c_str()) ;   //strage behaviour on the last word
         }
         return k;
     }

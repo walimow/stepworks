@@ -4,7 +4,6 @@
 ///Forward-Reader with Base&&   (because std::list in libstdc++)
 
 #include <foab.first/isvalid.hpp>
-#include <xtypes.hpp>
 #include <core/optional_type.hpp>
 
 using stepworks::types::var_t;

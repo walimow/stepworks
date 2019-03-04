@@ -47,8 +47,9 @@ struct apply< Writer<Tb>,Tb(*)(const Ta&) > {
         };
         return std::visit(vis {*this}, ra.second,ra.first, w);
     }
-
 };
+
+
 
 ////
     //type     .... 
@@ -137,25 +138,28 @@ struct apply< Writer<Tb>,Tb(*)(const Ta&), bool(const Ta&)> {
 };
 
 template<typename Ta,         
-         template <typename ...>typename  Dest,
-         typename  Stream 
-         //, template <typename > typename Form = var_t
+         template<typename...> typename  Dest
+         //,         template <typename > typename Form 
          >
-struct apply <Ta, Stream, Dest<Ta>> {
-    Stream &&  _ist;
-    //Dest<Ta>&&  _dest;
-    auto operator()(Dest<Ta> &&  d)  ->Dest<Ta>{
-        if (_ist.bad())
-            return std::move(d);
-        Ta a;
-        _ist>> a;
-        if (_ist.fail())
-            return std::move(d);
-        else
-            return apply{ std::move(_ist) }(std::move(d.f1(a)) ) ;   
+struct apply <Ta,  Dest<Ta>> {
+    Dest<Ta> &&  _dest;
+    
+    auto f1(const Ta &  a)  ->Dest<Ta>{
+        _dest<<a;
+        return std::move(  _dest );
+        
+    }
+    auto f0()  ->Dest<Ta>{
+        return std::move(  _dest );
     }
 };
 
+
+template < typename Ta, template<typename...>typename Dest>
+auto _xt ( apply <Ta, Dest<Ta>>&& w )
+{
+    return apply<Ta, Dest<Ta>> {std::move ( w ) };
+}
 
 
 }

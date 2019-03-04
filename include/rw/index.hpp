@@ -34,18 +34,18 @@ template<typename Ta, typename Pos,
          template<typename...>  typename Dest,
          template <typename > typename Form
          >
-auto  _go_ 
+auto  _go_
 (
-    insert<  std::pair< Ta,Pos>,       Dest >&&        dest, 
+    insert<  std::pair< Ta,Pos>,       Dest >&&        dest,
     Form<std::pair<Ta,Pos>>&& a_ )
 ->insert<
-    std::pair< Ta,Pos>,  Dest  >
+std::pair< Ta,Pos>,  Dest  >
 {
 
     using kv = typename std::pair<Ta,Pos>;
 
     auto a0 = std::move ( a_ );
-    return ( apply_optional_void<  kv,dict_index > ( a0, insert< kv,dict_index > ( dest ) ) );
+    return ( _x( insert< kv,dict_index > ( dest ) )) ( a0);  // apply_optional_void<  kv,dict_index >
 }
 
 

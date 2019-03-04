@@ -2,12 +2,13 @@
 
 
 #include <foab.first/isvalid.hpp>
-#include <xtypes.hpp>
+//#include <xtypes.hpp>
 #include <core/optional_type.hpp>
 #include <core/optional.hpp>
 
 #include <foab_fab.hpp>
 #include <fab.hpp>
+#include <apply.hpp>
 
 //#include <foab_rrb.hpp>  //(a) ,b&&->b (optional a)
 
@@ -26,14 +27,35 @@ template <typename Ta,
 struct wstream {
 
     struct wfoab {
-        //Stream&&  _dest;
+        Stream&&  _dest;
         using _argument_type=Ta;
-        wstream operator () ( const Ta& a, wstream && dest ) const
+        wstream operator () ( const Ta& a ) const
         {
-            std::move ( dest )._stream<<a;
-            return wstream {std::move ( dest ) };
+            std::move ( _dest )<<a;
+            return wstream {std::move ( _dest ) };
+        }
+        wstream f0 () const
+        {
+            return wstream {std::move ( _dest ) };
         }
     };
+    
+    struct wfoab_pred {
+        Stream&&  _dest;
+        bool (*predicate)(const Ta&);
+        using _argument_type=Ta;
+        wstream operator () ( const Ta& a ) const
+        {
+            if (predicate(a))
+                std::move ( _dest )<<a;
+            return wstream {std::move ( _dest ) };
+        }
+        wstream f0 () const
+        {
+            return wstream {std::move ( _dest ) };
+        }
+    };
+
 
     Stream&& _stream;
     std::string _post;
@@ -42,34 +64,28 @@ struct wstream {
     {
         return ! _stream.eof() && _stream.good();    //?
     }
-
-    wfoab write()
-    {
-        return wfoab {} ;
+    
+    auto operator()(const Ta& a)const{
+             std::move ( _stream )<<a;
+            return wstream {std::move ( _stream ) };
     }
 
 };
 
 
 
-
-
 template<typename Ta,
          typename  Src = std:: istream,
          template <typename > typename Form = var_t
          >
-auto  _go_ ( wstream<Ta, Src,Form >&& src, const Form<Ta>& a0 )->wstream<Ta,Src,Form> {
+auto  _go_ ( wstream<Ta, Src,Form >&& src, const Form<Ta>& a0 )->wstream<Ta,Src,Form>
+{
 
     wstream<Ta, Src > s =std::move ( src );
- 
-    if ( s )
-    {
-        using W =  wstream<Ta, Src, Form >;
-        return  stepworks::apply_optional
-        //  < Ta,W,Form >
-        ( a0,
-        std::move ( s ),
-        [] ( const Ta& a,W&& w_ )->W { auto w=std::move ( w_ ); w<<a; return std::move ( w );} );
+
+    if ( s ) {
+        return  stepworks::application::_ ( s ) ( a0 );
+
     }
     return   std::move ( s ) ;
 }
@@ -79,19 +95,13 @@ template<typename Ta,
          typename  Src = std:: istream,
          template <typename > typename Form = var_t
          >
-auto  _go_ ( wstream<Ta, Src,Form >&& src, const Form<Ta>& a0, bool (*predicate)(const Ta&) )->wstream<Ta,Src,Form> {
+auto  _go_ ( wstream<Ta, Src,Form >&& src, const Form<Ta>& a0, bool ( *predicate ) ( const Ta& ) )->wstream<Ta,Src,Form>
+{
 
     wstream<Ta, Src > s =std::move ( src );
- 
-    if ( s )
-    {
-        using W =  wstream<Ta, Src, Form >;
-        return  stepworks::apply_optional
-        //  < Ta,W,Form >
-        ( a0,
-        std::move ( s ),
-        [] ( const Ta& a,W&& w_ )->W { auto w=std::move ( w_ ); w<<a; return std::move ( w );}
-        , predicate );
+
+    if ( s ) {
+        return  stepworks::application::_ ( s,predicate ) ( a0 );
     }
     return   std::move ( s ) ;
 }
@@ -99,26 +109,14 @@ auto  _go_ ( wstream<Ta, Src,Form >&& src, const Form<Ta>& a0, bool (*predicate)
 template<typename Ta,
          typename  Src = std:: istream
          >
-auto  _go_ ( wstream<Ta, Src, var_t >&& src, const var_t<Ta>& a0 )->wstream<Ta,Src,var_t> {
-
-    //   static_assert(std::is_same<var_t <int>,  std::optional<int>>::value,"valt_t!");
-
-    
-    wstream<Ta, Src,var_t > s =std::move ( src );
-    if ( s )
-    {
-        using W =  wstream<Ta, Src, var_t >;
-        return  stepworks::apply_optional
-        //  < Ta,W,var_t >
-        ( a0,
-        std::move ( s ),
-        [] ( const Ta& a,W&& w_ )->W { auto& w=std::forward<W&> ( w_ );
-            w._stream<<a; 
-            if (w._post.size())
-                w._stream << w._post;
-      //      std::cout<<"? "<<a<<"\t!";
-           
-            return std::move ( w );} );
+auto  _go_ ( wstream<Ta, Src, var_t >&& src, const var_t<Ta>& a0 )->wstream<Ta,Src,var_t>
+{
+   // typename wstream<Ta, Src, var_t>::wfoab o{std::move ( s )};
+    //wstream<Ta, Src,var_t > s =std::move ( src );
+    wstream<Ta, Src > s =std::move ( src );
+    if ( s ) {
+      
+        return stepworks::application::_ (typename wstream<Ta, Src, var_t>::wfoab{std::move( src._stream) })  ( a0 );
     }
     return   std::move ( s ) ;
 }
@@ -127,28 +125,12 @@ auto  _go_ ( wstream<Ta, Src, var_t >&& src, const var_t<Ta>& a0 )->wstream<Ta,S
 template<typename Ta,
          typename  Src = std:: istream
          >
-auto  _go_ ( wstream<Ta, Src, var_t >&& src, const var_t<Ta>& a0 , bool (*predicate)(const Ta&))->wstream<Ta,Src,var_t> {
-
-    //   static_assert(std::is_same<var_t <int>,  std::optional<int>>::value,"valt_t!");
-
-    
+auto  _go_ ( wstream<Ta, Src, var_t >&& src, const var_t<Ta>& a0, bool ( *predicate ) ( const Ta& ) )->wstream<Ta,Src,var_t>
+{
     wstream<Ta, Src,var_t > s =std::move ( src );
-    if ( s  )
-    {
-        using W =  wstream<Ta, Src, var_t >;
-        return  stepworks::apply_optional
-        //  < Ta,W,var_t >
-        ( a0,
-        std::move ( s ),
-        [] ( const Ta& a,W&& w_ )->W { auto& w=std::forward<W&> ( w_ );
-            w._stream<<a; 
-            if (w._post.size())
-                w._stream << w._post;
-      //      std::cout<<"? "<<a<<"\t!";
-           
-            return std::move ( w );},
-        predicate
-        );
+    if ( s ) {
+        //return  stepworks::application::_ ( s, predicate ) ( a0 );
+        return stepworks::application::_ (typename wstream<Ta, Src, var_t>::wfoab_pred{std::move( src._stream), predicate })  ( a0 );
     }
     return   std::move ( s ) ;
 }
@@ -170,10 +152,10 @@ template<typename Ta,
          typename  Src = std:: istream,
          template <typename > typename Form
          >
-auto  _go_ ( wstream<Ta, Src, Form  >&& src, Ta&& a, bool(*predicate)(const Ta&) )
+auto  _go_ ( wstream<Ta, Src, Form  >&& src, Ta&& a, bool ( *predicate ) ( const Ta& ) )
 {
     wstream<Ta, Src, Form > s =std::move ( src );
-    if ( s && predicate(a))
+    if ( s && predicate ( a ) )
         s._stream<<a;
     return   std::move ( s ) ;
 }

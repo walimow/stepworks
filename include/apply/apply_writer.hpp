@@ -26,8 +26,6 @@ namespace stepworks::application
 {
 
 
-//template <typename ...> struct ___apply;
-
 ///apply writer:    a, w&&->w  (skip offs)
 template <template<typename...>typename W, typename Ta >
 struct apply <  W<Ta> ( W<Ta>&&, const Ta& ) > {
@@ -46,13 +44,13 @@ struct apply <  W<Ta> ( W<Ta>&&, const Ta& ) > {
     auto operator () ( const var_t<Ta>& a )const->W<Ta>
     {
         if ( a )
-        return _go_ ( std::move ( _w ),  *a );
+            return _go_ ( std::move ( _w ),  *a );
         else
             return std::move ( _w );
-        }
+    }
 
-        template <template<typename...>typename Form, typename Else >
-auto operator () ( const  Form<Ta, Else>& a )const
+    template <template<typename...>typename Form, typename Else >
+    auto operator () ( const  Form<Ta, Else>& a )const
     {
         return _go_ ( std::move ( _w ),  a );
     }
@@ -69,13 +67,13 @@ auto operator () ( const  Form<Ta, Else>& a )const
     auto operator () ( var_t<Ta>&& a )const ->W<Ta>
     {
         if ( a )
-        return _go_ ( std::move ( _w ), std::move ( *a ) );
+            return _go_ ( _w , std::move ( *a ) );
         else
             return std::move ( _w );
-        }
+    }
 
-        template <template<typename...>typename Form, typename Else >
-auto operator () ( Form<Ta, Else>&& a )
+    template <template<typename...>typename Form, typename Else >
+    auto operator () ( Form<Ta, Else>&& a )
     {
         return _go_ ( std::move ( _w ), std::move ( a ) );
     }
@@ -86,7 +84,7 @@ auto operator () ( Form<Ta, Else>&& a )
 template <template<typename...>typename W, typename Ta>
 auto _ ( W<Ta>&& w )
 {
-    return apply  <  W<Ta> ( W<Ta>&&, const Ta& ) >  { std::move ( w )  };
+    return apply  <  W<Ta>  ( W<Ta>&&, const Ta& ) >  { std::move ( w )  };
 }
 
 
@@ -162,6 +160,81 @@ auto _ ( std::map<K,Ta>&& w )
 {
     return apply<std::map<K, Ta>&&, const Ta& > {std::move ( w ) };
 }
+
+
+///////with predicate
+
+///apply writer:    a, w&&->w  (skip offs)
+template <template<typename...>typename W, typename Ta >
+struct apply <  W<Ta> ( W<Ta>&&, const Ta& ),bool(const Ta&) > {
+    W<Ta>&& _w;
+    bool (*predicate)(const Ta&);
+    
+    auto operator () ( const Ta& a )const
+    {
+        if (!predicate(a))
+            return std::move ( _w );
+        
+        if constexpr ( has_member_f1t< decltype ( _w ), Ta >() ) {
+            return _w.f1 (  a  );
+        } else
+            return    _f_ ( std::move ( _w ),  a );
+    }
+
+    ///TODO s. o.
+
+    auto operator () ( const var_t<Ta>& a )const->W<Ta>
+    {
+        
+        if ( a   &&  predicate(a))
+            return _go_ ( std::move ( _w ),  *a );
+        else
+            return std::move ( _w );
+    }
+
+
+    template <template<typename...>typename Form, typename Else >
+    auto operator () ( const  Form<Ta, Else>& a )const
+    {
+        
+        return  is_valid (a) ?   _go_ ( std::move ( _w ),  a ) 
+        : std::move ( _w );
+    }
+///
+
+    auto operator () ( Ta&& a )const
+    {        
+        if (!predicate(a))
+            return std::move ( _w );        
+        if constexpr ( has_member_f1t< decltype ( _w ), Ta >() ) {
+            return _w.f1 ( std::move( a)  );
+
+        } else
+            return _f_ ( std::move ( _w ),  std::move ( a ) );
+    }
+    auto operator () ( var_t<Ta>&& a )const ->W<Ta>
+    {
+        if ( a &&  predicate(*a))
+            return _go_ ( std::move ( _w ), std::move ( *a ) );
+        else
+            return std::move ( _w );
+    }
+
+    template <template<typename...>typename Form, typename Else >
+    auto operator () ( Form<Ta, Else>&& a )
+    {
+        return _go_ ( std::move ( _w ), std::move ( a ) );
+    }
+};
+
+
+
+template <template<typename...>typename W, typename Ta>
+auto _ ( W<Ta>&& w , bool (*pred)(const Ta&))
+{
+    return apply  <  W<Ta> ( W<Ta>&&, const Ta& ),bool (const Ta&)  >  { std::move ( w ), pred  };
+}
+
 
 
 

@@ -2,7 +2,6 @@
 
 
 #include <foab.first/isvalid.hpp>
-#include <xtypes.hpp>
 #include <core/optional_type.hpp>
 
 ///@todo....
