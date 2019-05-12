@@ -1,7 +1,7 @@
 
 #pragma once
 
-
+#include <cassert>
 
 #include <core/optional_type.hpp>
 

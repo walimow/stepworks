@@ -58,10 +58,10 @@ template <typename R, typename A>
 struct apply<R ( const var_t<A>&), R()> {
     using Fnc = R(*)(const A&);
     Fnc _f;
-    
+
     using Fnc0 = R(*)();
     Fnc0 _default ;
-  
+
     constexpr auto operator()(const var_t<A> &a)const {
         assert(_f);
         if (a)
@@ -103,8 +103,8 @@ struct apply<R ( const var_t<A>&), R(const Else&)> {
     F _f;
     R(*_else)(const Else&) ;
 
-      template  < template <typename...> typename Form>      ///clang-problem
-  //  template  < template <typename,typename> typename Form>
+    template  < template <typename...> typename Form>      ///clang-problem
+    //  template  < template <typename,typename> typename Form>
     constexpr auto operator()(const Form<Else,A>& a0)const {
         struct vis {
             const apply& _here;
@@ -130,7 +130,7 @@ auto _( R(*f)(const A&),  R(*df)( const Else&) )
 ///?here?
 /*
 template <typename Ta, template<typename...> R, typename Tb=ta>
-struct apply<> 
+struct apply<>
 */
 
 }

@@ -1,8 +1,11 @@
 #pragma once
 
+#include <apply.hpp>
+
 namespace stepworks::wtype {
-
-
+  ///@todo impl
+    
+/*
 template <typename Ta>
 auto _assign(Ta&& dest, const Ta& src ) {
     return std::move(dest)=src;
@@ -13,6 +16,7 @@ auto _assign( std::list<Ta>&& dest, const Ta& src ) {
     std::move(dest).push_back(src);
     return std::move(dest);
 }
+*/
 
 
 template <typename Key, typename Ta,  template<typename...>  typename Dest>
@@ -31,7 +35,7 @@ struct  assign {
 
 };
 
-
+/*
 template <typename Key, typename Ta,  template<typename...>  typename Dest, template <typename...> typename List>
 struct  __assign2list {
 
@@ -54,10 +58,11 @@ struct  __assign2list {
     }
 
 };
+*/
 
 
 template <typename Key, typename Ta,  template<typename...>  typename Dest, template <typename...> typename List>
-struct  /*writer_*/assign2list {
+struct  assign2list {
 
     Dest<Key,  List<Ta>>  _dest;
 
@@ -73,8 +78,6 @@ struct  /*writer_*/assign2list {
 
 };
 
-#include <apply.hpp>
-
 
 using stepworks::application::_;
 
@@ -84,26 +87,15 @@ template<typename Key,   typename Ta,
          >
 auto  _go_(assign<Key, Ta, Dest >&& dest, Form< std::pair<Key,Ta > >&& a_ )->assign<Key, Ta, Dest  > {
     Form<std::pair<Key,Ta>> a0 = std::move(a_);
-    return (
-               apply_optional_void<
+    return
+        apply (dest, a0);
+    /*(
+       
+                 apply_optional_void<
                std::pair<Key,Ta>, Dest<Key,Ta>
                >( a0, assign<Key, Ta, Dest>(dest) ));
+    */
 }
-
-
-/*
-template<typename Key,   typename Ta,
-          template<typename...>  typename Dest,
-         template <typename > typename Form
-         >
-auto  _go_ ( assign<Key, Ta, Dest >&& dest, Form< std::pair<Key,Ta > >&& a_ )->assign<Key, Ta, Dest  >{
-     Form<std::pair<Key,Ta>> a0 = std::move(a_);
-     return (
-         apply_optional_void<
-            std::pair<Key,Ta>, Dest<Key,Ta>
-            >( a0, assign<Key, Ta, Dest>(dest) ));
-}
-*/
 
 
 
@@ -117,7 +109,7 @@ auto  _go_ ( assign2list<Key, Ta, Dest,List >&& dest, Form< std::pair<Key,Ta > >
     return
 
     assign2list<Key, Ta, Dest,List  > {
-        (apply_optional_void<
+        (  apply /*_optional_void*/<
          std::pair<Key,Ta>,
          Dest<Key,List< Ta> >    >( a0, //  assign2list<Key, Ta, Dest,List>(
                                     std::move( dest)
@@ -127,6 +119,6 @@ auto  _go_ ( assign2list<Key, Ta, Dest,List >&& dest, Form< std::pair<Key,Ta > >
         )
     };
 }
-
+/**/
 
 }

@@ -105,8 +105,8 @@ template<typename Ta,
          >
 auto  _go_  ( wforward<Ta, Dest >&& dest, const var_t<Ta>& a0, bool(*predicate)(const Ta&) )
 {
-    using WFw= wforward<Ta, Dest  >;
-    using W= typename wforward<Ta, Dest  >::wfoab;
+  //  using WFw= wforward<Ta, Dest  >;
+  //  using W= typename wforward<Ta, Dest  >::wfoab;
 
     wforward<Ta, Dest > s =std::move(dest);
     if (s && a0 )

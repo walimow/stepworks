@@ -16,7 +16,34 @@ include_directories(${GTEST_INCLUDE_DIR})
 # Add test cpp file
 
 add_executable(runUnitTests
-wtype_test.cpp
+foab_test.cpp
+xT_test.cpp         
+
+process_item_test.cpp
+
+foab_fab_test.cpp
+processing_test.cpp
+
+rtype_test.cpp
+#wtype_test.cpp
+
+filter_test.cpp
+
+rgenerator_test.cpp
+
+match_wte_test.cpp
+match_wtex_test.cpp
+
+application_test.cpp
+
+rwprimitiv_test.cpp
+process_stream_test.cpp
+
+var_test.cpp                                  
+
+step_test.cpp
+
+eval_test.cpp
 )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 

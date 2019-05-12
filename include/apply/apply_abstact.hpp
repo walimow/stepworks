@@ -1,8 +1,10 @@
 
 
-namespace stepworks::application {
+namespace stepworks{
+namespace     application {
 
 
 template <typename...> struct apply;
 
+}
 }
