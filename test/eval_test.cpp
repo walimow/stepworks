@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include <eval/evaluate.hpp>
-#include <eval/apply.hpp>
-#include <eval/lform.hpp>
+#include <eal/evaluate.hpp>
+#include <eal/apply.hpp>
+#include <eal/lform.hpp>
 
 #include <tuplex/cons.hpp>
 #include <tuplex/totext_t.hpp>

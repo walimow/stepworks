@@ -3,6 +3,9 @@
 #include <string>
 #include <variant>
 
+#include <eal/curf.hpp>
+
+
 #include <core/optional_type.hpp>
 #include <typeinfo>
 
