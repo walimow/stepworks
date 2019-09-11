@@ -3,11 +3,13 @@
 #include <rw/rforward.hpp>
 #include <rw/select.hpp>
 #include <rw/rstream.hpp>
+//#include <rw/wdictionary.hpp>
 
 #include <core/optional.hpp>
 
 #include  <list>
 #include <sstream>
+#include <map>
 
 using namespace stepworks;
 
@@ -46,3 +48,9 @@ TEST(rtype_test,  rstream_isstream) {
 ////using prime
 #include <prim/rcontainer.hpp>
 ////TODO Test r-prime
+
+std::map<std::string, int> mi2s;
+
+TEST(rtype_test,  dict_text) {
+    
+}

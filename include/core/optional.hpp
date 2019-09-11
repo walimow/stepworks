@@ -57,7 +57,7 @@ auto _asserted(const Ta& a)->const Ta&{
 
 template <typename Ta>
 auto _optional(const var_tx<Ta>& va, const Ta& _default){    
-    return  is_valid (va) ? std::get<1>(va)  : _default;
+    return /* is_valid<Ta>(va)*/ va.index() ? std::get<1>(va)  : _default;    
 }
 
 

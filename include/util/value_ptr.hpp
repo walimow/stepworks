@@ -1,3 +1,5 @@
+#pragma once
+
 ///  sample from stackoverflow
 #include <iostream>
 #include <string>

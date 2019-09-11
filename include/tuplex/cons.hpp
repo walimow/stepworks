@@ -30,21 +30,7 @@ namespace stepworks::tuplex{
         
         return std::tuple_cat(a,b);
     }
-        
-      //  return     std::make_tuple( std::move(a), std::move(b) ) ;}
-      
-      // std::tuple_cat( std::move(a),    std::move(b) );
-       // stepworks::cons_ty(std::move(a), std::make_tuple( std::move(b)));
-       
-       
-/*
-    template <typename Ta, typename ...Right>
-    auto cons(Ta&& a,  std::tuple<Right...>&& b){  
-       
-        return std::tuple_cat( std::move( a),  std::move( b)     );
-    
-        
-    }*/
+
     
     
     template <typename Ta, typename ...Right>

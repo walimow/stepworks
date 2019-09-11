@@ -1,4 +1,3 @@
-
 cmake_minimum_required(VERSION 2.6)
 
 project(test)
@@ -44,6 +43,8 @@ var_test.cpp
 step_test.cpp
 
 eval_test.cpp
+curf_test.cpp
+tupleop_test.cpp
 )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 

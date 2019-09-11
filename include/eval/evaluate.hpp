@@ -3,7 +3,7 @@
 #include  <type_traits>
 
 
-namespace stepworks::eal{
+namespace stepworks::evaluation{
     
     
 template <typename Ta>

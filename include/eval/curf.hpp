@@ -17,7 +17,7 @@
 // Moreover, you should use std::bind anyway.
 
 
-namespace stepworks::eal::curf{
+namespace stepworks::curf{
 
 template<size_t n>
 using index_constant = std::integral_constant<size_t, n>;

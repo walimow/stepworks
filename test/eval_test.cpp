@@ -9,7 +9,7 @@
 #include <tuplex/append.hpp>
 #include <tuplex/ht.hpp>
 
-using stepworks::evaluation::eval;
+using stepworks::eal::eval;
 //using stepworks::les::to_text_t;
 
 //using stepworks::les::__to_text__;
@@ -76,21 +76,21 @@ auto add_lambda = [](auto first, auto second) {
 TEST ( evaluate_test, eval_apply )
 {
     nine n9;
-    EXPECT_EQ ( stepworks::evaluation::apply(   add, std::make_pair(1, n9)), 10);
+    EXPECT_EQ ( stepworks::eal::apply(   add, std::make_pair(1, n9)), 10);
 }
 
 
 
 TEST  (evaluate_test, eval_lispObject)
 {
-    auto ret= stepworks::evaluation::ltype::make_le_t( add2int{}, 41,1 );
+    auto ret= stepworks::eal::ltype::make_le_t( add2int{}, 41,1 );
     auto x =ret();
     EXPECT_EQ (42, x);
 }
 
 TEST  (evaluate_test, eval_lispFunction)
 {
-    auto ret= stepworks::evaluation::ltype::make_le_t( [](int a, int b) {
+    auto ret= stepworks::eal::ltype::make_le_t( [](int a, int b) {
         return a+b;
     }, 40,2 );
     auto x =ret();

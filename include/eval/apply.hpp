@@ -5,9 +5,9 @@
 
 #include <functional>
 
-using stepworks::eal::eval_auto;
+using stepworks::evaluation::eval_auto;
 
-namespace stepworks::eal {
+namespace stepworks::evaluation {
 ///std::apply with evaluation
 
 	namespace detail {

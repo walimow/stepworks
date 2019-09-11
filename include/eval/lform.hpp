@@ -3,7 +3,7 @@
 #include "apply.hpp"
 #include <tuple>
 
-namespace stepworks::eal::ltype{
+namespace stepworks::evaluation::ltype{
     
     template <typename...>struct le_t;
     
@@ -11,14 +11,14 @@ namespace stepworks::eal::ltype{
     
     struct le_t< F, Args...  >:  std::tuple<Args...>{
         le_t(F&& f, Args...args)
-            :_f(std::move(f))  , std::tuple<Args...>{args...}
+            : std::tuple<Args...>{args...},_f(std::move(f))  
         {}
         F _f;
         constexpr const std::tuple<Args...>& args()const {
             return (const std::tuple<Args...>&)(*this);
         }
         constexpr auto operator()()const{
-            return  stepworks::eal::apply(   _f, args() );
+            return  stepworks::evaluation::apply(   _f, args() );
         }
     };
     

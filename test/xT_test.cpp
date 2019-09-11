@@ -101,15 +101,10 @@ TEST ( xtypes_test,  impl_optional_info )
 
 TEST ( xtypes_test,  impl_optional_type_void )
 {
-
-
     using stepworks::types::var_t_type;  //  ::types::var_t_type<int>;
-
 
     var_t_type<int > none;
     var_t_type<int> one{1};
-
-
     {
         auto b=   _x ( is_valid<  int > {} )(none);
         EXPECT_EQ ( b,false );
