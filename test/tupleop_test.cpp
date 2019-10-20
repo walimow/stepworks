@@ -112,11 +112,5 @@ TEST (tupleops_test, partl3_5){
     EXPECT_EQ(v24,24);      
 }
 
-/*
-TEST (tupleops_test, partl3_52){    
-    
-    auto r = part_t<3>::left(  std::make_tuple(9,8,7,6,5)  );
-    auto v24 =  std::apply( [](int a, int b, int c){return a+b+c;}, r);
-    EXPECT_EQ(v24,24);      
-}
-*/
+
+

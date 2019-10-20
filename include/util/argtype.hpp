@@ -15,6 +15,7 @@ template <typename...> struct arg_1
 //{using type =void;}
 ;
  
+/*
 template <typename R, typename A, typename... Args>
 struct arg_1<R(A, Args...)>
 {
@@ -38,6 +39,9 @@ struct arg_1<Ret (Cls::*)(T, Args...)> {
 template <typename T>
 using arg_1_t =  typename arg_1<T>::type;   ///error here: no arg 1 recognized
 
+*/
+
+/////////////////
 
 template <typename...> struct ret
 //{using type =void;}

@@ -65,7 +65,7 @@ namespace stepworks{
     value_ptr<T> make_value_ptr( Args&&... args ) {
       return {std::make_unique<T>(std::forward<Args>(args)...)};
     }
-    
+    /*
     struct noisy {
         noisy() { std::cout << "ctor\n"; }
         ~noisy() { std::cout << "dtor\n"; }
@@ -74,5 +74,5 @@ namespace stepworks{
         noisy& operator=(noisy&&) { std::cout << "=&&\n"; return *this; }
         noisy& operator=(noisy const&) { std::cout << "=const&\n"; return *this; }
     };
-
+*/
 }    

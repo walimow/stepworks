@@ -38,6 +38,14 @@ void trace_t_impl(const std::tuple<Ty, Rest...>& a) {
     trace_t_impl(tail( std::move(a)));
 }
 
+/*
+ * special clang, windows
+template <typename Ty, typename Tz>
+void trace_t_impl(std::tuple<Ty, Tz>&& a) {
+	std::cout << head(std::move(a)) << '\t';
+	std::cout<< head(tail(std::move(a)));
+}
+*/
 
 template <typename Ty>
 void trace_t_impl(std::tuple<Ty>&& a) {

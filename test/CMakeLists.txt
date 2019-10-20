@@ -45,6 +45,10 @@ step_test.cpp
 eval_test.cpp
 curf_test.cpp
 tupleop_test.cpp
+argtypetest.cpp
+fo_test.cpp
+lazy_test.cpp
+rwmorph_test.cpp
 )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 

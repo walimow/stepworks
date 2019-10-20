@@ -45,6 +45,7 @@ struct apply< Writer<Tb>,Tb(*)(const Ta&) > {
                 return    std::move(w) ;
             }
         };
+        
         return std::visit(vis {*this}, ra.second,ra.first, w);
     }
 };

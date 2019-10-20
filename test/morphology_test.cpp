@@ -94,6 +94,31 @@ TEST(morphology_test_case,  process_transform_0) {
 
 }
 
+/////reader/////
+#include <stwtype_traits.hpp>
+
+using namespace stw;
+
+struct r_yes {
+    using element_type=int;
+};
+
+//std::pair<geht, int> 
+constexpr auto  _(r_yes&&) {
+    return 
+     std::make_pair( std::move(r_yes{}),  (int)42);
+  //   42;
+}
+
+struct none_off_all {
+};
+
+
+TEST(morphology_test_case2,  reader1) {
+ 
+    EXPECT_EQ(    is_reader_tR< r_yes>::value, false);
+}
+
     
     
     

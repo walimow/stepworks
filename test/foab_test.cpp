@@ -49,10 +49,10 @@ TEST (foab_test_case, fbase_opfnc) {
     struct fab_1_0
     {
         using F = Tb(const Ta);
-        const F _f;
+        F _f;
         
         using F0 = Tb();
-        const F0 _f0;
+        F0 _f0;
         auto f1(const  Ta& a)->Tb{
             assert(_f);
             return _f(a);
