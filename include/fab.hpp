@@ -6,6 +6,7 @@
 
 
 #include <util/argtype.hpp>
+#include <util/arg_t.hpp>
 
 //#include <xtypes.hpp>
 #include <cassert>
@@ -15,6 +16,8 @@
 ///Fab:    a->b,0-> b  , convinience for 0/a visitors f0: default/nothing handling without arg,  f1: existing argument a ->b  
 
 namespace stepworks{
+    
+using argtool::arg_1_t;
     
 template < typename  Foab, template <typename> typename Form  >
 struct fab{
