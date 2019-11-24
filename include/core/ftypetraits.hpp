@@ -39,7 +39,7 @@ struct has_member_f1t
 
 template <typename T, typename Arg>
 struct has_member_f1t<T,Arg,
-       std::void_t<decltype(std::declval<T>().f1(std::declval<Arg>()))>>
+       std::void_t<        decltype(std::declval<T>().f1(std::declval<Arg>()))>>
        : std::true_type
        {};
 
