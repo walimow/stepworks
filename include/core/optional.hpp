@@ -4,7 +4,7 @@
 #include <foab.first/isvalid.hpp>
 
 #include <cassert>
-
+#include <variant>
 //using stepworks::types::apply_optional_void;
 using namespace stepworks::types;
 using stepworks::first::is_valid;
@@ -14,6 +14,12 @@ namespace stepworks{
 
 template <typename Ta>
 auto _optional(const var_t<Ta>& va, const Ta& _default)->const Ta&{
+    return (va) ? *va : _default;
+}
+
+
+template <typename Ta>
+auto _optional(const std::variant<Ta>& va, const Ta& _default){
     return (va) ? *va : _default;
 }
 

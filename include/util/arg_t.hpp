@@ -1,6 +1,14 @@
 #pragma once
 
+#include <type_traits>
+
 namespace argtool{
+    
+    
+template <typename ...Args>
+struct args_t{
+    
+};
 
 template <size_t,  typename...> struct arg_t;
 
@@ -14,6 +22,28 @@ struct arg_t<0, R (A, Args...)>{
     using type =A;
 };
 
+
+template<typename R, typename =void>  struct is_ft1 : std::false_type {};
+
+          
+
+ template < template <typename...> typename T, typename A>
+struct is_ft1<
+            T<A>  ,
+           std::void_t<        
+                 decltype( std::declval<  T <A> >().operator() ( std::declval<A>())  )              
+                 > 
+           >:std::true_type{ };
+
+           
+
+
+template < template <typename> typename T ,   typename A>
+struct arg_t<    0,   T<A>    >
+{
+    
+    using type =A;
+};
 
 
 template < size_t N,   typename R, typename A , typename ...Args>

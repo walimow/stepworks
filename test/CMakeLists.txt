@@ -8,21 +8,29 @@ enable_testing()
 
 find_package(GTest REQUIRED)
 
-include_directories(${GTEST_INCLUDE_DIR})
+include_directories(${GTEST_INCLUDE_DIR} )
+
 
 
 
 # Add test cpp file
+#[[
+add_executable(runUnitTests
+processing_test.cpp
+)
+]]
+
 
 add_executable(runUnitTests
+
+
 foab_test.cpp
 xT_test.cpp         
-
 process_item_test.cpp
 
 foab_fab_test.cpp
-processing_test.cpp
 
+processing_test.cpp
 rtype_test.cpp
 #wtype_test.cpp
 
@@ -49,6 +57,13 @@ argtypetest.cpp
 fo_test.cpp
 lazy_test.cpp
 rwmorph_test.cpp
+
+steph_test.cpp
+fmap_test.cpp
+reposition_test.cpp
+
+itx_test.cpp
+stx_test.cpp
 )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 

@@ -11,6 +11,8 @@
 #include <sstream>
 #include <forward_list>
 #include <list>
+#include <deque>
+
 
 TEST ( processing_test, rempty )
 {
@@ -52,7 +54,6 @@ TEST ( processing_test,  rw_t_impl )
  stepworks::make_forward_readeable_t ( std::list<int> {1,2,3,42} );
 }
 
-
 namespace proctest{
     
     struct textform{
@@ -85,7 +86,6 @@ TEST ( processing_test,  rw_123_t )
 }
 
 
-
 namespace processingfiltertest{
 
 bool is_even(const int& i){
@@ -111,34 +111,29 @@ TEST ( processing_test,  rw_123_filtered )
     
     std::cout<<"\n*******************(even? ? ?)..42********************\n";
     
-    
 }
-
 
 TEST ( processing_test,  rw_123_filtered_to_list )
 {
     auto wf = stepworks::wforward<int, std::list,var_t>{  std::list<int>()  };
         
     
-    std::cout<<"\n*******************1..********************\n";
+    std::cout<<"\n*******************1..********************\n"<<std::dec;
     
     auto res =    stepworks::process::perform_process<int> (
-        stepworks::make_forward_readeable ( std::forward_list<int> {1,2,3,4,5,7, 42} ),
-        
-        //stepworks::wstream<int, std::ostream> { std::move ( std::cout ), "\t"  } ,
+        stepworks::make_forward_readeable ( std::forward_list<int> {1,2,3,4,5,7, 42,98} ),
         
         stepworks::wforward<int, std::list>{  std::list<int>()  },
         
         processingfiltertest::is_even
     );
     
+  std::cout<<"\n";
     for ( const auto& k :   res.second._dest){
-        std::cout<<"\n..." << k;
+        std::cout<<"\n..:"<<std::dec << k<<"\n";
     };
-    
     
     std::cout<<"\n*******************(even==3? ? ?)..42********************\n";
     
     
 }
-

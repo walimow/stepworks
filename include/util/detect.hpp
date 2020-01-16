@@ -89,13 +89,4 @@ namespace stepworks::detect
     template <typename T>
     using is_iterable_pback = decltype(detail::is_iterable_push_impl<T>(0));
 
-    /*
-    template <typename T>    
-    using is_iterable_fix = decltype( detail::is_iterable_impl<T>(0))::value 
-                        && ! 
-                            decltype(detail::is_iterable_ins1_impl<T>(0) )::value
-//                        && ! decltype(detail::is_iterable_kv_impl<T>(0))::value
-//                        && ! detail::is_iterable_push_impl<T>(0) 
-                                     ;  // and decltype(!detail::is_iterable_impl<T>(0)) ;
-     */                                    
 }

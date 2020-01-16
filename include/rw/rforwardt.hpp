@@ -49,7 +49,29 @@ struct fw_t //<Ta, Src<Ta>, Form<Ta>>
         (*this) ?  *_it : Form<Ta> {};
     }
 
+    ///position support
+    using position_t = typename Src<Ta>::iterator;
+  
 };
+
+
+template <typename Ta,
+          template <typename... > typename Src,
+          template <typename > typename Form
+          >
+auto  get_position  (const fw_t<Ta, Src, Form>& fw)
+{
+    return fw._it;
+}
+
+template <typename Ta,
+          template <typename... > typename Src,
+          template <typename > typename Form
+          >
+void set_position  ( fw_t<Ta, Src, Form>& fw_, typename fw<Ta, Src, Form>::position_t&& pos)
+{
+    fw_._it = std::move(pos);
+}
 
 
 

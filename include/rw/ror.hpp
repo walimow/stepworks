@@ -12,6 +12,8 @@ namespace stepworks {
 //  buffer+srcReader may be work together as reader 
 //  morphology: dynamic, runtime
 
+    ///INCOMPLETE!!!
+    
     /*
      template <typename Ta,
           typename Stream = std::istream,
@@ -24,19 +26,16 @@ namespace stepworks {
       struct ror_buffered{
           RBuffer _buffer;
           typename RBuffer::iterator _buffer_iterator;
-          
           RServer&& _server;
           std::size_t buffer_sz() { return buffer.size();}
           auto prepare (unsigned int sz){   //completeness
               for (unsigned int k =_buffer.size(); k< sz; k++ ){
                   auto [a0, R] =  _go_(_server);
-                  
                   if (!a0)
                       return buffer_sz() -sz;
                    else{
                      _buffer.push_back( _asserted(a0));  
                 } 
-                  
             }
             return  buffer_sz();   
           }

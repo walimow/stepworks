@@ -11,7 +11,7 @@ namespace stepworks::eal::ltype{
     
     struct le_t< F, Args...  >:  std::tuple<Args...>{
         le_t(F&& f, Args...args)
-            :_f(std::move(f))  , std::tuple<Args...>{args...}
+            : std::tuple<Args...>{args...},_f(std::move(f))  
         {}
         F _f;
         constexpr const std::tuple<Args...>& args()const {

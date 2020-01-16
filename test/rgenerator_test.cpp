@@ -3,6 +3,7 @@
 #include <process/proc.hpp>
 #include <rw/wforward.hpp>
 #include <list>
+#include <vector>
 #include <forward_list>
 
 //using Frr = Ta(*)(Ta&&);
@@ -26,7 +27,8 @@ TEST ( generator_test, first )
     auto res =    stepworks::process::perform_process_controlled<int> (
                       stepworks::make_generator<int>(gen_plus_nine),
 
-                      stepworks::wforward<int, std::forward_list> {  std::forward_list<int>()  },
+                  //    stepworks::wforward<int, std::forward_list> {  std::forward_list<int>()  },
+    stepworks::wforward<int, std::vector> {  std::vector<int>()  },
 
                       control_less_then_100
                   );
@@ -34,7 +36,7 @@ TEST ( generator_test, first )
 //    int sz =res.second._dest.size();
 
     for ( const auto& k :   res.second._dest) {
-        std::cout<<"\n..." << k;
+      //  std::cout<<"\n..." << k;
     };
 
 

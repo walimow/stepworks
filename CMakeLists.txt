@@ -9,10 +9,13 @@ else()
   add_definitions( -std=c++1z)
 endif()
 
+add_compile_options(-pthread)
+
 set (CMAKE_BUILD_TYPE Debug)
 
 include_directories(
 ./include 
+./../../src/immer-master
 )
 
 add_executable(stepworks main.cpp)

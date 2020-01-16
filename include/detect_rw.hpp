@@ -48,7 +48,7 @@ struct is_reader_tR<R,
        std::pair< R, typename R::element_type>
        ,
        decltype(
-           _  (std::declval<R&&>(), std::declval<const typename R::context_type& >()) //( 			std::declval<  R&&>())
+           _  (std::declval<R&&>(), std::declval<const typename R::context_type& >()) 
        )
        >::type
 

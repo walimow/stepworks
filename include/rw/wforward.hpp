@@ -20,8 +20,8 @@ template <typename Ta,
           template<typename...>  typename Dest,
           template <typename > typename Form = var_t>
 struct wforward {
-    Dest<Ta>&& _dest;
-
+    Dest<Ta>&& _dest; 
+   
     constexpr  operator bool()const {        return true;    //?
     }
 
@@ -35,12 +35,10 @@ struct wforward {
         
         constexpr wforward operator ()(const Form<Ta>& a) const {
             if (_(is_valid<Ta>())(a)){
+                ///test
+                std::cout<< std::hex<<(int) _asserted<Ta>(a) <<". ";
                 _dest.push_back( _asserted<Ta>(a));
             }
-            ///test
-            for (const auto& x: _dest)  std::cout<<x<<"\n";
-                
-            ///
             return wforward {std::move(_dest)};
         }
         constexpr Dest<Ta> f0()const {
@@ -58,24 +56,15 @@ struct wforward {
             return wforward {std::move(_dest)};
         }
 
-        /*
-        constexpr Dest<Ta> operator ()(const Form<Ta>& a) const {
-
-            //std::move(_dest).push_back(a);
-            return std::move(_dest);
-        }*/
-
         constexpr Dest<Ta> operator ()(const var_t<Ta>& a) const {
 
             if (a  && _pred(*a)) {
                 auto& dref= std::forward<decltype(Dest<Ta>())&> (_dest);
+                std::cout<< std::hex<<(int) *a <<". ";
+               
                  dref.push_back(*a);
             }
-            return 
-            //wforward {
-            std::move(_dest)
-            // }
-            ;
+            return      std::move( _dest ) ;
         }
         constexpr Dest<Ta> f0()const {
             return wforward {std::move(_dest)};
@@ -93,10 +82,6 @@ auto  _go_ ( wforward<Ta, Dest >&& dest, const var_t<Ta>& a0 ) {
 
     auto w =  typename W::wfoab{ std::move(dest._dest)  }(a0);
     return std::move(w);
-    //  return W{   w._dest} ;
-    // return W{ )_dest };
-
-
 }
 
 
@@ -163,12 +148,13 @@ template<typename Ta,
          template<typename...>typename  Src,
          template <typename > typename Form
          >
-auto  _go_ ( wforward<Ta, Src, Form  >&& src, const Ta& a )
+auto  _go_ ( wforward<Ta, Src, Form  >&& src, Ta a )->wforward<Ta, Src, Form  >
 {
-    wforward<Ta, Src, Form > s =std::move(src);
-    if (s  )
-        s._dest.push_front(a);   ///wg  forward_list
-    return   std::move(s) ;
+  //  wforward<Ta, Src, Form > s =std::move(src);
+  //  if (s  )
+    ///////@@@@@@@
+        std::move(src)._dest.push_back(a);   ///wg  forward_list
+    return   std::move(src) ;
 }
 
 

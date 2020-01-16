@@ -20,10 +20,14 @@ struct fw //<Ta, Src<Ta>, Form<Ta>>
     //const
     Src<Ta> _src;
     typename Src<Ta>::iterator _it;
+    
+    using position_t = typename Src<Ta>::iterator;
     Ta _get()const {
         return *_it;
     }
+///position support
 
+   
     fw()=default;
     fw(const fw&)=default;
     fw(Src<Ta>&&s)
@@ -51,8 +55,29 @@ struct fw //<Ta, Src<Ta>, Form<Ta>>
     Form<Ta> operator *()const {
         (*this) ?  *_it : Form<Ta> {};
     }
-
 };
+
+template <typename Ta,
+          template <typename... > typename Src,
+          template <typename > typename Form
+          >
+auto  get_position  (const fw<Ta, Src, Form>& fw)
+{
+    return fw._it;
+}
+
+template <typename Ta,
+          template <typename... > typename Src,
+          template <typename > typename Form
+          >
+void set_position  (  fw<Ta, Src, Form>& fw_, typename fw<Ta, Src, Form>::position_t&& pos
+    
+)
+{
+  //  fw_._it = pos;
+}
+
+
 
 /*
 template<typename Ta,
@@ -104,17 +129,18 @@ template<typename Ta,
          template <typename... > typename Src,
          template <typename > typename Form
          >
-auto  _go_ ( fw<Ta, Src, Form >&& src  )->std::pair<Form<Ta>,  fw<Ta, Src,Form> >
+auto  _go_ ( fw<Ta, Src, Form >&& src  )  ->std::pair<Form<Ta>,  fw<Ta, Src,Form> >
 {
     if ( src )
     {
-        auto test0 = src._it ==src._src.end();
+        //auto test0 = src._it ==src._src.end();
         auto a0  = src._get();
         ++src._it;
-        return std::make_pair(
-                   a0,
-                   make_forward_readeable( std::move(src._src), src._it)
-               );
+        return std::make_pair
+        (
+                   Form<Ta>{a0},
+                   src //    make_forward_readeable( std::move(src._src), src._it)
+        );
     }
     else
         return std::make_pair( Form<Ta> {}, src);
