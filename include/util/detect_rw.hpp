@@ -1,6 +1,6 @@
 #pragma once
 
-// context is just one type, if its  variadic (or any oher other combination), is has to be a tupe (or a struct)
+// context is just one type, if its  variadic (or any oher other combination), is has to be a tuple (or a struct)
 
 namespace stepworks {
 
@@ -13,17 +13,10 @@ struct is_reader_tR : std::false_type {};
 
 template <class R>
 struct is_reader_tR<R,
-       std::void_t<            decltype(_(std::declval<R&&>()
-                                         ))       >
+       std::void_t<            decltype(_(std::declval<R&&>()   ))       >
        >
        :
-       std::is_same <
-       std::pair< R, typename R::element_type>
-       ,
-       decltype(
-           _(std::declval<R&&>())
-       )
-       >::type
+       std::is_same <       std::pair< R, typename R::element_type> ,       decltype(           _(std::declval<R&&>())       )       >::type
        { };
 }
 
@@ -35,23 +28,14 @@ template<typename R, typename =void>  struct is_reader_tR : std::false_type {};
 
 
 template <class R>
-struct is_reader_tR<R,
-           std::void_t<
-       decltype(_ (
-                    std::declval<R&&>(),
-                    std::declval < const typename R::context_type&>()
-                )  )  >
-       >
+struct is_reader_tR<R,  std::void_t< decltype(_ (    std::declval<R&&>(),    std::declval < const typename R::context_type&>()               )  )  >       >
        :
-
-       std::is_same <
-       std::pair< R, typename R::element_type>
+       std::is_same <       std::pair< R, typename R::element_type>
        ,
        decltype(
            _  (std::declval<R&&>(), std::declval<const typename R::context_type& >()) //( 			std::declval<  R&&>())
        )
        >::type
-
        { };
 
 }
@@ -63,25 +47,11 @@ template< class, class = void>
 struct is_reader_tR : std::false_type {};
 
 template <class R>
-struct is_reader_tR<R,
-       std::void_t< decltype(
-           _( std::declval<R&&>()   )
-       )
-       >
-       >
-       : std::is_same <
-
-       std::pair<
-       typename R::base_return_framed_type
+struct is_reader_tR<R,       std::void_t< decltype( _( std::declval<R&&>()   )  )  >    >
+       : std::is_same < std::pair<   typename R::base_return_framed_type      ,
+       typename R::element_type     >
        ,
-       typename R::element_type
-       >
-       ,
-       decltype(
-           _(std::declval<R&&>())
-       )
-
-       >::type
+       decltype(           _(std::declval<R&&>())       )   >::type
        { };
 }
 
