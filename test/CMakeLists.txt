@@ -64,6 +64,8 @@ reposition_test.cpp
 
 itx_test.cpp
 stx_test.cpp
+box_test.cpp
+hmap_test.cpp
 )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
