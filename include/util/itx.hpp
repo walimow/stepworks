@@ -22,7 +22,7 @@ namespace  stepworks{
         static const bool   has_rest =   (sizeof(Corpus) % sizeof(Elm))>0;
         static const std::size_t size_effectiv = size_factor+ (has_rest ? 1 : 0);
         
-        using box_t = union {
+        using construct_t = union {
             std::array<Elm, size_effectiv > _arr;
             Corpus       _corpus;
         } ;
@@ -31,23 +31,23 @@ namespace  stepworks{
        
         template < template <typename...> typename stream_t >
         static constexpr auto read_corpus( fw<Elm, stream_t, std::optional>&& strm )->std::pair<return_t, fw<Elm, stream_t, std::optional>>{
-            box_t _box;
+            construct_t _cbx;
             for (std::size_t k=0;  k< size_effectiv; ++k){
                 auto as = _go_(strm);
                 if (as.first)
-                    _box._arr[k] = _asserted( as.first) ;
+                    _cbx._arr[k] = _asserted( as.first) ;
                 else
                     return std::make_pair( stepworks::make_fail_value(k), std::move(strm) );
             }
-            return std::make_pair( _box._corpus, std::move(strm));
+            return std::make_pair( _cbx._corpus, std::move(strm));
         }
         
        
        template <  template <typename...> typename stream_t >
         static
         constexpr 
-        auto write_corpus( wforward<Elm, stream_t, std::optional> strm, const box_t& box )-> wforward<Elm, stream_t, std::optional>{
-          for ( auto itr =box._arr.begin(); itr != box._arr.end(); itr++  ){
+        auto write_corpus( wforward<Elm, stream_t, std::optional> strm, const construct_t& cbx )-> wforward<Elm, stream_t, std::optional>{
+          for ( auto itr =cbx._arr.begin(); itr != cbx._arr.end(); itr++  ){
                 _go_(std::move(strm),* itr);
             }
             return std::move(strm);
@@ -58,8 +58,8 @@ namespace  stepworks{
         template < template <typename...> typename Form >
         static 
         constexpr 
-        auto write_corpus_forward_ret( Form<Elm>&& form, const Corpus& box ){
-            auto ret =write_corpus( wforward< Elm, Form, std::optional> { std::move(form) }, (const box_t&)  box);
+        auto write_corpus_forward_ret( Form<Elm>&& form, const Corpus& cbx ){
+            auto ret =write_corpus( wforward< Elm, Form, std::optional> { std::move(form) }, (const construct_t&)  cbx);
             return std::move(ret._dest);
         }
         
@@ -72,17 +72,17 @@ namespace  stepworks{
             static_assert( stepworks::has_reposition<  fw_t >::value,"reposition support is needed"  );
            
             auto here = get_position(strm);
-            box_t _box;
+            construct_t _cbx;
             for (std::size_t k=0;  k< size_effectiv; ++k){
                 auto as = _go_(std::move( strm) );
                 if (as.first)
-                    _box._arr[k] = _asserted( as.first) ;
+                    _cbx._arr[k] = _asserted( as.first) ;
                 else{
                     set_position(strm, std::move(here) );
                     return std::make_pair( stepworks::make_fail_value(k), std::move(strm) );
                 }
             }
-            return std::make_pair( _box._corpus, std::move(strm));
+            return std::make_pair( _cbx._corpus, std::move(strm));
             
         }
         
