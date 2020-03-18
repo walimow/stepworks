@@ -5,6 +5,7 @@
 
 namespace stepworks{
     //super as const
+    //contains an additional particle (as 'cargo')
     template <class Cargo,class K, class T, 
     class  Compare= std::less<K>,  
     class Allocator = std::allocator<std::pair<const K, T> > >

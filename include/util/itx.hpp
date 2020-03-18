@@ -17,7 +17,7 @@ namespace  stepworks{
     
     template <typename Elm, typename Corpus>
     struct itx{
-        static_assert( sizeof(Elm) <= sizeof(Corpus),"size of element must not be greter then size of corpus");
+        static_assert( sizeof(Elm) <= sizeof(Corpus),"size of element must not be greater then size of corpus");
         static const std::size_t size_factor =  sizeof(Corpus) / sizeof(Elm);
         static const bool   has_rest =   (sizeof(Corpus) % sizeof(Elm))>0;
         static const std::size_t size_effectiv = size_factor+ (has_rest ? 1 : 0);
