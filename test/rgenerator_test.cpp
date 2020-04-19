@@ -5,6 +5,7 @@
 #include <list>
 #include <vector>
 #include <forward_list>
+#include <util/ignore.hpp>
 
 //using Frr = Ta(*)(Ta&&);
 
@@ -20,7 +21,7 @@ bool control_less_then_100(const int& x, void*) {
 TEST ( generator_test, first )
 {
     auto g = stepworks::make_generator<int>(gen_plus_nine);
-
+    stepworks::ignore(g);
 
 
 
@@ -37,6 +38,7 @@ TEST ( generator_test, first )
 
     for ( const auto& k :   res.second._dest) {
       //  std::cout<<"\n..." << k;
+        stepworks::ignore(k);
     };
 
 

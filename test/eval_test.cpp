@@ -8,6 +8,7 @@
 
 #include <tuplex/append.hpp>
 #include <tuplex/ht.hpp>
+#include <util/ignore.hpp>
 
 using stepworks::eal::eval;
 //using stepworks::les::to_text_t;
@@ -46,7 +47,7 @@ TEST ( evaluate_test, first )
 
 TEST ( evaluate_test, evalauto )
 {
-    nine n9;
+    //nine n9;
     EXPECT_EQ ( eval_auto::get((int)1.9),1);
     EXPECT_EQ (  eval_auto::get(nine()),9);
 }
@@ -103,6 +104,7 @@ using stepworks::tuplex::cons;
 TEST  (evaluate_test, eval_les_cons0)
 {
     auto x = cons();
+    stepworks::ignore(x);
 }
 
 //#include <eval/les/totext_t.hpp>

@@ -6,6 +6,7 @@
 #include <array>
 #include "gtest/gtest.h"
 #include <string>
+#include <util/ignore.hpp>
 
 using stepworks::steph::fm;
 
@@ -129,6 +130,7 @@ TEST (fmap_test_case, impl_array){
     
     auto l =std::array<int,3>{133,233,333};
     auto r = fm( f{} , l);
+    stepworks::ignore(r);
     
 }
 
@@ -137,7 +139,7 @@ TEST (fmapt_test_case, impl_array){
     
     auto l =std::array<int,3>{133,233,333};
     auto r = fm( f{} , l);
-    
+    stepworks::ignore(r);
 }
 
 /**/

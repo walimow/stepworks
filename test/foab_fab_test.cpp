@@ -5,6 +5,7 @@
 
 #include <optional>
 #include <apply.hpp>
+#include <util/ignore.hpp>
 
 
 using  stepworks::fab;
@@ -33,8 +34,10 @@ TEST(foab_fab_test_case,  foabfab_0) {
     foab<xplus> plus7{xplus{7}};
     
     auto f0 =[](){ return std::optional<int>{};};
+    stepworks::ignore(f0);
     
     auto ff7= fab<foab<xplus>, stepworks::types::var_t >::make(plus7 /*, f0*/);
+    stepworks::ignore(ff7);
     
 }
 
@@ -52,6 +55,7 @@ TEST(foab_fab_test_case,  foabfab_1) {
     int i7=7;
     {
         auto r14=ff7.f1(7);   ///compiled casted?
+        stepworks::ignore(r14);
     }
     auto r14=ff7.f1(i7);
     
@@ -105,7 +109,8 @@ TEST(foab_fab_test_case,  foabfab_add7) {
 
       auto r14=ff7.f1(x);   ///compiled casted?
 
-  //  EXPECT_EQ(r14, 14);
+
+    EXPECT_EQ(r14, 14);
 
 }
 

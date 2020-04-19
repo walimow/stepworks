@@ -6,7 +6,7 @@ using stepworks::mk_itxcorpus;
 using stepworks::itx_write;
 
 TEST (stx_test_case, mkcorpus) {
-    char c6[6]="hall?";
+   // char c6[6]="hall?";
      auto r123 = mk_itxcorpus(1, 42.0 );
      auto rs = itx_write(r123);   
      

@@ -2,12 +2,19 @@
 #include "gtest/gtest.h"
 #include <util/box.hpp>
 
+//#include <util/boxm.hpp>
+#include <map>
+
+
 using stepworks::bx::box;
 
 TEST (box_test_case, impl_1)
 {
  std::vector<box<int, std::vector> > vgehtdas;
 }
+
+
+
 
 using stepworks::bx::to_string;
 
@@ -67,13 +74,13 @@ TEST (box_test_case, move_box)
     
 }
 
-/*
 
-using stepworks::mk_box;
+/*
+using stepworks::bx::mk_box;
 
 TEST (box_test_case, impl_initializer_list2)
 {
     auto x = mk_box<int, std::initializer_list >(1, {2, 3}, 4);
 }
-
 */
+

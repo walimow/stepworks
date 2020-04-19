@@ -1,5 +1,13 @@
 #include "gtest/gtest.h"
 #include <util/hmapx.hpp>
+#include <util/hmap.hpp>
+
+TEST (hmap_test, hmapout)
+{
+    using HMap = stepworks::hmap< std::string, int>;
+    HMap hm;
+    hm.write(std::cout);
+}
 
 
 TEST (hmap_test, hmapx)
@@ -8,6 +16,9 @@ TEST (hmap_test, hmapx)
     
     SMap root{"*root*"};
     SMap child{"*child*",&root};
+
+
+    child.write(std::cout);
     
 }
 

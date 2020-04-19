@@ -6,7 +6,7 @@
 
 TEST (rwmorph_test_case, read0)
 {
-    int x;
+    //int x;
 }
 
 

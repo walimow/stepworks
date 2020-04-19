@@ -23,7 +23,7 @@ processing_test.cpp
 
 add_executable(runUnitTests
 
-
+##[[
 foab_test.cpp
 xT_test.cpp         
 process_item_test.cpp
@@ -65,8 +65,13 @@ reposition_test.cpp
 itx_test.cpp
 stx_test.cpp
 box_test.cpp
+##]]#
+boxm_test.cpp
+
 hmap_test.cpp
-)
+iox_test.cpp
+
+        strutil_test.cpp)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
 
@@ -74,7 +79,6 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 target_link_libraries(runUnitTests ${GTEST_LIBRARY_DEBUG} ${GTEST_MAIN_LIBRARY_DEBUG} pthread ) #pthread i had to add (? -k.h.)
 
-#target_link_libraries(runUnitTests ${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY} pthread ) #pthread i had to add (? -k.h.)
 
 ##target_link_libraries(runUnitTests gtest  pthread )
 

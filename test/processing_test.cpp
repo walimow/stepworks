@@ -115,7 +115,7 @@ TEST ( processing_test,  rw_123_filtered )
 
 TEST ( processing_test,  rw_123_filtered_to_list )
 {
-    auto wf = stepworks::wforward<int, std::list,var_t>{  std::list<int>()  };
+ //   auto wf = stepworks::wforward<int, std::list,var_t>{  std::list<int>()  };
         
     
     std::cout<<"\n*******************1..********************\n"<<std::dec;

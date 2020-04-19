@@ -83,7 +83,7 @@ struct file2lines {
         //read lines
         //char s[N];
         
-        int test = dict.size();
+//        int test = dict.size();
        
         ist.getline(s,N-1);  //??
         int len = strlen(s);

@@ -115,8 +115,8 @@ auto make_forward_readeable( Src<Ta>&& s)-> fw <Ta, Src, Form> {
     fw <Ta, Src, Form>  r = fw <Ta, Src, Form> { std::move(s) };
 
     r._it=r._src.begin();
-    auto test=r._it==r._src.end();
-    return r; //!
+ //   auto test=r._it==r._src.end();
+    return r;
 }
 
 template <typename Ta, template <typename... > typename Src, template <typename > typename Form=var_t  >

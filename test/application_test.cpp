@@ -8,6 +8,7 @@
 #include <set>
 
 #include <rw/winsert.hpp>
+#include <util/ignore.hpp>
 
 using namespace::stepworks::application;
 
@@ -32,15 +33,17 @@ TEST ( applcation_test_case, impl )
         return 3*v;
     };
 
+    stepworks::ignore(three_times);
+
     int ( *f1 ) ( const int& ) = [] ( const int& a ) {
         return 2* a;
     };
 
-/*
+
     {
         auto  r4= apply<int ( const int& ) > {two_times} ( 21 );
         EXPECT_EQ ( r4,42 );
-    }*/
+    }
     {
         auto  r4=   _ ( f1 ) ( 21 );
         EXPECT_EQ ( r4,42 );
@@ -67,6 +70,9 @@ TEST ( applcation_test_case, writer )
 
 //    stepworks::wtype::wforward<int, std::set> wff;
     decltype(w)&& wirr= std::move(w);
+
+    stepworks::ignore(wirr);
+
     for (auto i : {
                 6,3,77,1,1,-1
             }) {

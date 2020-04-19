@@ -100,7 +100,7 @@ auto  _go_  ( wforward<Ta, Dest >&& dest, const var_t<Ta>& a0, bool(*predicate)(
         using W= typename wforward<Ta, Dest  >::wfoab_pred;
         W { std::move(dest._dest), predicate}(a0);
     }
-    return   std::move(s) ;
+    return   s ;
 }
 
 

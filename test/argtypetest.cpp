@@ -5,17 +5,20 @@
 #include <eal/argtuple_t.hpp>
 
 #include <string>
+#include <util/ignore.hpp>
 
 int t3( std::string, int, std::string){return 1;}
 
 TEST (argtype_test_case, t0)
 {
     argtool::arg_t <1, decltype(t3) >::type  x =42;
+    stepworks::ignore(x);
 }
 
 
 TEST (argtype_test_case, argtuple_test0)
 {
     stepworks::eal::argtuple_t<decltype(t3)>::args_t x("hallo",42,"world");
+    stepworks::ignore(x);
 }
 

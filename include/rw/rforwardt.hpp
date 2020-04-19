@@ -80,7 +80,7 @@ auto make_forward_readeable_t( Src<Ta>&& s)-> fw_t <Ta, Src, Form> {
     fw_t <Ta, Src, Form>  r = fw_t <Ta, Src, Form> { std::move(s) };
 
     r._it=r._src.begin();
-    return std::move(r);
+    return r;
 }
 
 template <typename Ta, template <typename... > typename Src, template <typename > typename Form=var_t  >

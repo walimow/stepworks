@@ -118,7 +118,7 @@ auto  _go_ ( wstream<Ta, Src, var_t >&& src, const var_t<Ta>& a0 )->wstream<Ta,S
       
         return stepworks::application::_ (typename wstream<Ta, Src, var_t>::wfoab{std::move( src._stream) })  ( a0 );
     }
-    return   std::move ( s ) ;
+    return    s  ;
 }
 
 
@@ -132,7 +132,7 @@ auto  _go_ ( wstream<Ta, Src, var_t >&& src, const var_t<Ta>& a0, bool ( *predic
         //return  stepworks::application::_ ( s, predicate ) ( a0 );
         return stepworks::application::_ (typename wstream<Ta, Src, var_t>::wfoab_pred{std::move( src._stream), predicate })  ( a0 );
     }
-    return   std::move ( s ) ;
+    return    s  ;
 }
 
 template<typename Ta,
@@ -144,7 +144,7 @@ auto  _go_ ( wstream<Ta, Src, Form  >&& src, Ta&& a )
     wstream<Ta, Src, Form > s =std::move ( src );
     if ( s )
         s._stream<<a;
-    return   std::move ( s ) ;
+    return   s  ;
 }
 
 
@@ -157,7 +157,7 @@ auto  _go_ ( wstream<Ta, Src, Form  >&& src, Ta&& a, bool ( *predicate ) ( const
     wstream<Ta, Src, Form > s =std::move ( src );
     if ( s && predicate ( a ) )
         s._stream<<a;
-    return   std::move ( s ) ;
+    return    s ;
 }
 
 

@@ -5,6 +5,7 @@
 
 #include <apply.hpp>
 #include <core/optional_type.hpp>
+#include <util/ignore.hpp>
 
 using stepworks::first::is_valid;
 //using stepworks::types::apply;
@@ -35,10 +36,13 @@ TEST ( xtypes_test,  impl_apply )
         EXPECT_EQ ( res,42 );
     }
     bool bf0 = has_member_f0<decltype ( fident_vint ) >();
-
+    stepworks::ignore(bf0);
     bool bb= bool ( none );
+    stepworks::ignore(bb);
     {
-        auto res = stepworks::application::_ ( fident_vint ) ( none );
+        auto res =
+                stepworks::application::_ ( fident_vint ) ( none );
+        stepworks::ignore(res);
     }
 
 }
@@ -53,7 +57,7 @@ TEST ( xtypes_test,  impl_apply_info )
     using Ty = decltype ( none );
 
     auto fident_vint=stepworks::make_foab<Ty,Ty> ( stepworks::ident );
-
+    stepworks::ignore(fident_vint);
 
 
     //  auto echo =  stepworks::application::apply<int,int>{fident_vint}(none);
@@ -153,6 +157,7 @@ TEST ( xtypes_test,  impl_optional_type )
     {
         auto b=   stepworks::application::apply < const decltype(t0)&> {t0}(none);
           //apply_optional_type<int,bool> ( none, test::is_valid_test<  int > {} );
+        stepworks::ignore(b);
         auto b2=  _  (t0)(none);
       
         EXPECT_EQ ( b2,false );
@@ -383,9 +388,11 @@ TEST ( xtypes_test,  impl_apply_1 )
     test::minus<int,double> mins{};
     {
         auto res= _ ( mins ); //
+        stepworks::ignore(res);
     }
 
     auto res= _ ( mins ) ( x1 ) ; //
+    stepworks::ignore(res);
 
 }
 

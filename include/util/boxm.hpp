@@ -21,11 +21,12 @@ namespace stepworks::bxm {
     struct boxm {
         using key_t  = K;
         using agg_t = Aggregation<K,  boxm< K, Ty, Aggregation> >;
-        using type = std::variant< Ty, agg_t >;
+        using atom_t = Ty;
+        using type = std::variant< atom_t, agg_t >;
 
         using base_t =Ty;
 
-        type _value;
+        type _value=agg_t {};
         boxm(type&& v): _value (std::move(v)){     //   std::cout<<"-1-";
         }
         boxm(const type& a):_value(a){     // std::cout<<"-2-";

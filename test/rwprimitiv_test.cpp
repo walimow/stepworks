@@ -5,6 +5,6 @@
 
 TEST (rwprimitiv_test_case, readlist)
 {
-    int x;
+//    int x;
 }
 
