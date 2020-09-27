@@ -10,15 +10,17 @@ using stepworks::iox::to_type_textable;
 namespace stepworks{
     //super as const
     //contains an additional particle (as 'cargo')
-    template <class Cargo,class K, class T, 
-    class  Compare= std::less<K>,  
-    class Allocator = std::allocator<std::pair<const K, T> > >
+    template <class Cargo,class K, class T,
+    class  Compare= std::less<K>,
+    class Allocator = std::allocator<std::pair<const K, T> >
+            ,template <typename ...> typename map_t= std::map
+            >
     struct hmapx{
         Cargo _cargo;   
-        using Map=std::map<K,T,Compare, Allocator> ;
+        using Map=map_t<K,T,Compare, Allocator> ;
         const hmapx * _psuper=nullptr;
         Map  _map;
-        
+        inline auto  avail0(const K& k)const {  return _map.find(k) == _map.end() ; }
         std::pair< typename Map::const_iterator, int > select (const K&k, int level=0) const {
             auto it = _map.find(k);
             return it != _map.end() ? 
@@ -43,7 +45,8 @@ namespace stepworks{
             for(const auto& [k,v]: _map) {
                 //out
                 out << kon << to_type_textable(k) << koff << delim << von
-                <<  v //to_type_textable(v)
+                <<  v
+                //to_type_textable(v)
                 << voff << delim;
             }
             if (_psuper && (!plimit || plimit!= _psuper))

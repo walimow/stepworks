@@ -27,6 +27,25 @@ namespace stepworks::bx {
         box(std::initializer_list<       std::variant < Ty,             box<Ty,Aggregation>  >> il);
     };
 
+    template <typename Ty, template <typename ...> typename Aggregation >
+    static  constexpr unsigned char bx_dim( const box<Ty,Aggregation> v){
+        return  v._value.index();
+    }
+
+    template <typename Ty, template <typename ...> typename Aggregation >
+    static  constexpr size_t bx_size( const box<Ty,Aggregation> &v){
+        struct{
+            auto operator()(const Ty&a )const {
+                return  1;
+            }
+            auto operator()(const  Aggregation<   box<Ty, Aggregation> >&o)const {
+                return o.size();
+            }
+        }vis;
+        return std::visit(vis, std::move(v));;
+    }
+
+
     namespace l2r{
 
         template <typename Ty, template <typename...> typename LeftAggregation, template <typename ...> typename RightAggregation>
@@ -76,6 +95,8 @@ namespace stepworks::bx {
         return box<Ty,Aggregation> { std::forward<Ty>(a) };
     }
 
+
+
     template <typename Ty, template <typename ...> typename Aggregation >
     std::string to_string(  const box<Ty, Aggregation> & o, const std::string& boxon="{", const std::string& boxoff="} ", const std::string& delim=", " ) {
 
@@ -106,7 +127,6 @@ namespace stepworks::bx {
 
 
     namespace detailX {
-
         template <typename Base, template <typename...> typename Aggregation, typename...Args>
         auto append_args(Aggregation<  box< Base, Aggregation >  >&& agg, Args&&...args) {
             (std::move(agg).push_back(( box<Base,Aggregation>) {

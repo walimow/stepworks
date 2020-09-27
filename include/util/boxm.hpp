@@ -32,14 +32,34 @@ namespace stepworks::bxm {
         boxm(const type& a):_value(a){     // std::cout<<"-2-";
         }
 
-        boxm( agg_t&& a):_value(std::move(a)){      //   std::cout<<"-3-";
+        boxm( const agg_t& a):_value(a){      //   std::cout<<"-3-";
         }
+
         boxm(){
             _value=agg_t{} ;
         }
         boxm(std::initializer_list<   std::pair<K,   std::variant < Ty,             boxm<K,Ty,Aggregation>  >>> il);
 
     };
+
+    template <typename K, typename Ty, template <typename ...> typename Aggregation=std::map >
+    static  constexpr unsigned char bx_dim( const boxm<K,Ty,Aggregation> v){
+        return  v._value.index();
+    }
+
+    template <typename K, typename Ty, template <typename ...> typename Aggregation=std::map >
+    static  constexpr size_t bx_size( const boxm<K,Ty,Aggregation> &v){
+        struct{
+            auto operator()(const Ty&a )const {
+                return  1;
+            }
+            auto operator()(const  Aggregation<   boxm<K,Ty, Aggregation> >&o)const {
+                return o.size();
+            }
+        }vis;
+        return std::visit(vis, std::move(v));;
+    }
+
 
     namespace l2r{
 
@@ -147,7 +167,7 @@ namespace stepworks::bxm {
     auto mk_box_value(std::initializer_list<
        std::pair<K,
        std::variant < Base,
-                              boxm<K, Base,Aggregation>  >>> il   )-> typename boxm<K,Base,Aggregation>::type
+                            boxm<K, Base,Aggregation>  >>> il   )-> typename boxm<K,Base,Aggregation>::type
     {
         typename boxm<K,Base, Aggregation>::agg_t agg_dest;
 
@@ -205,6 +225,8 @@ namespace stepworks::bxm {
         }
         _value = a;
     }
+
+
 
 }
 
