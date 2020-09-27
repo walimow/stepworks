@@ -2,7 +2,7 @@
 
 #include <tuple>
 
-#include <eal/fo_t.hpp>
+#include <eal/fo.hpp>
 #include <eal/apply.hpp>
 #include <eal/lazy_t.hpp>
 
