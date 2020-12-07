@@ -10,13 +10,14 @@ namespace stepworks::iox{
 
     template  <typename T>
     auto to_type_textable(const T& v){
-        return v;// std::to_string(v);
+        std::ostringstream ost; ost<< v;
+        return ost.str();// std::to_string(v);
     };
 
 
     template  <typename T>
     auto to_type_textable(const std::unique_ptr<T> v){
-        return "======";
+        return "(======)";
     }
 
     template <typename...>     struct ost_t;

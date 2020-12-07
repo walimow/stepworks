@@ -138,12 +138,15 @@ TEST (wtype_test,  w_vartx) {
 TEST(wtype_test,  wforward0x) {
 
     using stepworks::types::var_t_info;
-    std::vector<int>  v;
-    stepworks::wforward<int, std::vector,var_t_info>  ws{  std::move(v) };
+
+    using t_type = unsigned long;
+
+    std::vector<t_type>  v;
+    stepworks::wforward<t_type, std::vector,var_t_info>  ws{  std::move(v) };
 
     auto r=stepworks::_go_
-           <int, std::vector, var_t_info>
-           (std::move(ws),         var_t_info<int>( 42) );
+           <t_type, std::vector, var_t_info>
+           (std::move(ws),         var_t_info<t_type>( 42) );
     EXPECT_EQ(r._dest.size(),1);
     EXPECT_EQ(*r._dest.begin(), 42);
 

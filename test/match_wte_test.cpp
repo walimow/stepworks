@@ -26,14 +26,14 @@ TEST (match_wte_test_case, collatz) {
 	using W =  stepworks::matching::atom::wte::_M<unsigned long, unsigned long>;
 	using  namespace collatzfs;
 
-	W::Op cv = 42;
+	W::Op cv = (unsigned long)42;
 	
 	W::Op fv = stepworks::matching::atom::wte::_ab<unsigned long, unsigned long>{ feven };
 
 //	W::Op w = (W*) nullptr;
 
 	{
-		auto  quatsch = W{ is_odd, 42, 11 };
+		auto  quatsch = W{ is_odd, (unsigned long)42, (unsigned long) 11 };
 	
 	}
 
@@ -50,7 +50,7 @@ TEST (match_wte_test_case, collatz) {
 	{
 		auto  quatsch = W( is_odd,
 		new   W	(is_4, on4,  feven)
-		, 11 );
+		, (unsigned long)11 );
 
 	}
 

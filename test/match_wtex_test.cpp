@@ -42,7 +42,7 @@ TEST (match_wtex_test_case, collatz) {
         
 	using  namespace collatzfs_wtex;
 
-	W::Op cv = 42;
+	W::Op cv = (unsigned long)42;
 	
 	W::Op fv = stepworks::matching::atom::wtex::_ab<unsigned long, unsigned long
 	   , collatzfs_wtex::collatz_base<unsigned long>
@@ -51,7 +51,7 @@ TEST (match_wtex_test_case, collatz) {
 //	W::Op w = (W*) nullptr;
 
 	{
-		auto  quatsch = W{ is_odd, 42, 11 };
+		auto  quatsch = W{ is_odd, (unsigned long)42, (unsigned long)11 };
 	
 	}
 
@@ -68,7 +68,7 @@ TEST (match_wtex_test_case, collatz) {
 	{
 		auto  quatsch = W( is_odd,
 		new   W	(is_4, on4,  feven)
-		, 11 );
+		, (unsigned long)11 );
 
 	}
 

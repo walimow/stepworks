@@ -15,7 +15,7 @@ namespace stepworks{
         using Map=std::map<K,T,Compare, Allocator> ;
         const hmap * _psuper=nullptr;
         Map  _map;
-        
+        inline auto  avail0(const K& k)const {  return _map.find(k) == _map.end();}
         std::pair< typename Map::const_iterator, int > select (const K&k, int level=0)const {
             auto it = _map.find(k);
             return  it != _map.end() ?

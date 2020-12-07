@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <string>
-#include <util/boxm.hpp>
+#include <box/boxm.hpp>
 #include <exception>
 #include <map>
 

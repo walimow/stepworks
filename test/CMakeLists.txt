@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.0)
 
 project(test)
  
@@ -64,14 +64,25 @@ reposition_test.cpp
 
 itx_test.cpp
 stx_test.cpp
-box_test.cpp
+
 ##]]#
 boxm_test.cpp
 
 hmap_test.cpp
 iox_test.cpp
+        strutil_test.cpp wcontext_test.cpp
+        detect_writingtype_test.cpp
+        detect_allocator_type_test.cpp
+        detect_iterable_test.cpp
 
-        strutil_test.cpp)
+        single_test.cpp
+
+        app_rekurs_test.cpp
+        box0_test.cpp
+        boxinl_test.cpp
+        boxmk_test.cpp
+
+        detect_tostring.cpp)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
 
