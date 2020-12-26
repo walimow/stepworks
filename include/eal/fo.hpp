@@ -4,6 +4,7 @@
 #include <util/testvoid.hpp>
 #include <util/function_traits.hpp>
 #include "util_t.hpp"
+#include "curf.hpp"
 
 namespace stepworks::eal::fo {
 
@@ -14,9 +15,6 @@ struct has_signature_t:  std::false_type{};
 
 template <class T>
 struct has_signature_t<T, typename test_void< typename T::arg_signature_tt>::type>  : std::true_type{};
-
-
-
 
 ///build function objects
 
@@ -209,6 +207,7 @@ struct ft<F, std::tuple<Ta,RestArgs...>>
 
 
 //////////////////////
+/*
 template <typename F, typename Enable = void>
 struct _ft;
 
@@ -230,7 +229,7 @@ struct _ft<F, typename std::enable_if< !has_signature_t<F>::value>::type  >
 };
 
 template <typename F>
-struct _ft<F, typename std::enable_if< 
+struct _ft<F, typename std::enable_if<
 has_signature_t<F>::value>::type  
 >
 {
@@ -246,7 +245,7 @@ has_signature_t<F>::value>::type
                     args_tuple);
     }
 };
-
+*/
 
 struct factor
 {
@@ -279,5 +278,9 @@ constexpr  auto mk_fo( F&& o ){
 }
 
 
+    template <typename F >
+    constexpr  auto mk_fo2( F&& o ){
+        return  factor::gen_ts( std::forward<F>(o) );
+    }
 
 }

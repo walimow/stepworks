@@ -1,7 +1,7 @@
 #pragma once
 
 
-//src:  https://gist.github.com/Redchards/c5be14c2998f1ca1d757
+//src (inside namespace):  https://gist.github.com/Redchards/c5be14c2998f1ca1d757
 
 #include <functional>
 #include <tuple>
@@ -36,7 +36,6 @@ public:
 	{
 		return std::get<n>(boundedArgs_);
 	}
-
 private:
 	std::tuple<Args...> boundedArgs_;
 };
@@ -64,10 +63,8 @@ public:
 	}
 
 private:
-    
-    
       std::tuple<typename std::decay_t<Args>...> boundedArgs_;
-    
+
 //	std::tuple<Args&& ...> boundedArgs_;
 };
 
@@ -80,6 +77,9 @@ template<class Tfn, class ... Args>
 class binder
 {
 public:
+
+    using arg_signature_tt = std::tuple<Args...>;
+
 	//template< class ... TArgs>
 	constexpr binder(Tfn&& f, Args&& ... args) noexcept
 		: _fo{ std::forward<Tfn>(f) },
@@ -94,6 +94,10 @@ public:
 		return call(std::make_index_sequence< sizeof...(Args)>{}, std::forward<CallArgs>(args)...);
 	}
 
+	binder(const binder&)=default;
+
+    template<class Ty, class...Brgs>
+    friend std::ostream& operator<< ( std::ostream& os, const binder<Ty, Brgs...>& dt );
 private:
 	template<class ... CallArgs, size_t ... Seq>
 	constexpr decltype(auto) call(std::index_sequence<Seq...>, CallArgs&& ... args)
@@ -111,5 +115,14 @@ private:
 	{
 		return binder<TCls, Args...>{  std::forward<TCls>(f), std::forward<Args>(args)...};
 	}
-	
+
+
+    template< class F, class... Args>
+    auto operator<< ( std::ostream& os, const binder<F, Args...>& t )-> std::ostream&{
+      ///  os << " { "<< to_string(t._fo) << "}";   /////@TODO
+        return os;
+    };
+
+
 }
+

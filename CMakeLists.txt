@@ -1,10 +1,13 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 2.6)
 project(stepworks)
 
 add_definitions ( -Wall   -lstdc++ )
 
-add_definitions( -std=c++2a)
-
+if (MAKE_GCC7)
+  add_definitions( -std=c++2a)
+else()
+  add_definitions( -std=c++2a)
+endif()
 
 add_compile_options(-pthread)
 
@@ -18,7 +21,7 @@ include_directories(
 set( ST_INCLUDES  include/util/iox.hpp include/box/boxm.hpp
         include/util/ignore.hpp include/util/tostrx.hpp include/eal/val.hpp include/box/constr.hpp include/box/mkbox.hpp
          include/box/apply.hpp
-        include/detect/detect_allocator.hpp include/detect/detect_tostring.hpp)
+        include/detect/detect_allocator.hpp include/detect/detect_tostring.hpp include/util/log.hpp include/detect/detect_tuple.hpp include/detect/detect_fo.hpp)
 
 add_executable(stepworks main.cpp ${ST_INCLUDES})
 

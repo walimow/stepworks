@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 2.6)
 
 project(test)
  
@@ -82,7 +82,7 @@ iox_test.cpp
         boxinl_test.cpp
         boxmk_test.cpp
 
-        detect_tostring.cpp)
+        detect_tostring.cpp logsupport_test.cpp)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
 

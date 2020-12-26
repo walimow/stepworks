@@ -6,9 +6,12 @@
 #define STEPWORKS_TOSTRX_HPP
 
 #include <sstream>
+#include <memory_resource>
+#include <detect/detect_tuple.hpp>
 //#include <util/
 //‘std::__cxx11::basic_string<char>::basic_string(const std::vector<int>&)’
 #include <detect/detect_tostring.hpp>
+#include <detect/detect_iterable.hpp>
 
 namespace stepworks {
 
@@ -40,7 +43,7 @@ namespace stepworks {
         if (!opt)
             opt = ecomma | espace;
         std::ostringstream ost;
-        char adelim[3] = {',', ':', ';'};
+//        char adelim[3] = {',', ':', ';'};
         std::string str_delim = "";
 
         if ((eform & opt) == eform) {
@@ -68,6 +71,8 @@ namespace stepworks {
     }
 
     template<typename Ty, template<typename ...> typename Form, typename Allocator>
+///todo requires iterable
+    requires ( stepworks::bxx::detect::is_forward_iterable< Form<Ty>>::value )
     auto to_string(const Form<Ty, Allocator> &v, int opt_ = 0) {
         int opt = opt_;
         if (!opt)
@@ -91,7 +96,7 @@ namespace stepworks {
                 break;
             default:;
         }
-        if (opt && espace)
+        if ((opt & espace)==espace)
             str_delim += ' ';
 
         for (const auto &a: v) {
@@ -99,6 +104,26 @@ namespace stepworks {
         }
         return ost.str();
     }
+
+
+    template <typename ... Ts>
+    std::string to_string(const Ts& ... ts) {
+        std::stringstream ss;
+        const char* sep = "";
+        ((static_cast<void>(ss << sep <<  ts ), sep = " "), ...);    ///the point, where unprintable types occur! (no to_string<X>)
+        return ss.str();
+    }
+
+    template <typename... Args>
+    std::string tuple_to_string(const std::tuple<Args...> &t) {
+        return std::apply([](const auto&... ts) { return to_string(ts...); }, t);
+    }
+
+    template <typename... Args>
+    std::string to_string(const std::tuple<Args...> &t) {
+        return tuple_to_string(t);
+    }
+
 }
 
 

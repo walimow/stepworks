@@ -4,7 +4,8 @@
 
 #include <eal/fo.hpp>
 #include <eal/apply.hpp>
-#include <eal/lazy_t.hpp>
+#include <eal/lazy.hpp>
+#include <eal/curf.hpp>
 
 
 int add2(int a, int b ) {
@@ -65,9 +66,11 @@ TEST (fo_test_case, fo_has_signature) {
     };
 
     {
-        auto ff=  _ft<decltype(lx) > { std::move(lx)  };
+
+        auto ff=   mk_fo(lx); //ft<decltype(lx) > { lx  };
         std::cout<<  std::boolalpha<< "\nlambda (false?)"<<  "\t"<< has_signature_t<decltype(ff)>::value  ;
         EXPECT_EQ(has_signature_t<decltype(lx)>::value, false);
+
     }
 }
 
@@ -109,4 +112,13 @@ TEST (fo_test_case, fo_lambda2) {
     
     EXPECT_EQ(r,42);
 }
+
+using stepworks::eal::curf::bind;
+
+TEST (fo_test_case, fo_curf) {
+
+ // auto  ff=
+
+}
+
 

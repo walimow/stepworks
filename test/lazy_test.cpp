@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include <eal/lazy_t.hpp>
+#include <eal/lazy.hpp>
 
 
 struct add2sig{
@@ -9,7 +9,7 @@ struct add2sig{
     }           
 };
 
-using stepworks::eal::lazy_t;
+using stepworks::eal::lazy;
 using stepworks::eal::_lazy_;
 
 TEST (lazy_test_case, lazy0) {

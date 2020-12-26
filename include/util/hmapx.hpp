@@ -56,7 +56,7 @@ namespace stepworks{
                const auto&[k,v]=*it;
                const auto& tk=k;
                const auto& tv=v;
-             
+
                out << kon;
                out << k;
                out << koff << delim << von;

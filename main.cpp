@@ -1,3 +1,4 @@
+#include "util/log.hpp"
 
 //using stepworks::types::var_tx;
 #include <iostream>
