@@ -21,7 +21,7 @@ include_directories(
 set( ST_INCLUDES  include/util/iox.hpp include/box/boxm.hpp
         include/util/ignore.hpp include/util/tostrx.hpp include/eal/val.hpp include/box/constr.hpp include/box/mkbox.hpp
          include/box/apply.hpp
-        include/detect/detect_allocator.hpp include/detect/detect_tostring.hpp include/util/log.hpp include/detect/detect_tuple.hpp include/detect/detect_fo.hpp)
+        include/detect/detect_allocator.hpp include/detect/detect_tostring.hpp include/util/log.hpp include/detect/detect_tuple.hpp include/detect/detect_fo.hpp include/box/typemorph.hpp include/util/c2c.hpp)
 
 add_executable(stepworks main.cpp ${ST_INCLUDES})
 
