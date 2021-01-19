@@ -21,7 +21,7 @@ namespace stepworks::detect{
                     decltype(std::declval<C>().operator[]( std::declval<std::size_t>() ))
             > >:   // std::true_type {};   ///
             std::is_same<
-                    typename C::mapped_type,
+                    typename C::value_type,
                     typename std::decay<
                             decltype(std::declval<C>()[std::declval<std::size_t>()])
                     >::type

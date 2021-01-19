@@ -6,7 +6,7 @@
 #include <detect//detect_iterable.hpp>
 #include <gtest/gtest.h>
 
-using stepworks::bxx::detect::is_forward_iterable;
+using stepworks::detect::is_forward_iterable;
 
 
 TEST ( detect_forward_iterable, testint )

@@ -27,9 +27,13 @@ namespace stepworks::bxm {
         >;
         using atom_t = Ty;
         using type =   std::variant< atom_t, agg_t >;
-       // *  using alloc_t = Allocator;
 
         using base_t =Ty;
+
+        struct agg_position{
+            const agg_t& _container;
+            typename agg_t::const_iterator _it;
+        };
 
         type _value=agg_t {};
         boxm(type&& v): _value (std::move(v)){     //   std::cout<<"-1-";

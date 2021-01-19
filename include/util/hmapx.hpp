@@ -48,21 +48,13 @@ namespace stepworks{
             out<< cargo_on ;
             out<<   to_type_textable(_cargo);
             out<<    cargo_off;
-            auto test = _map.size();
-           // for(const auto& [k,v]: _map) {
-           const auto itend = _map.end();
            for (auto it = _map.begin(); it!= _map.end(); ++it ){
                 //out
                const auto&[k,v]=*it;
-               const auto& tk=k;
-               const auto& tv=v;
-
                out << kon;
                out << k;
                out << koff << delim << von;
                out <<   v;
-
-                //to_type_textable(v)
                out << voff << delim;
             }
             if (_psuper && (!plimit || plimit!= _psuper))

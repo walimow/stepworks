@@ -5,7 +5,7 @@
 #ifndef STEPWORKS_DETECT_TOSTRING_HPP
 #define STEPWORKS_DETECT_TOSTRING_HPP
 
-namespace stepworks::bxx::detect {
+namespace stepworks::detect {
 
     template<typename C, typename=void>
     struct supports_tostring : std::false_type {

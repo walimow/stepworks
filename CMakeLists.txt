@@ -20,8 +20,17 @@ include_directories(
 
 set( ST_INCLUDES  include/util/iox.hpp include/box/boxm.hpp
         include/util/ignore.hpp include/util/tostrx.hpp include/eal/val.hpp include/box/constr.hpp include/box/mkbox.hpp
-         include/box/apply.hpp
-        include/detect/detect_allocator.hpp include/detect/detect_tostring.hpp include/util/log.hpp include/detect/detect_tuple.hpp include/detect/detect_fo.hpp include/box/typemorph.hpp include/detect/detect_cmorph.hpp include/cmorph/imorph.hpp include/detect/detect_size.hpp include/detect/detect_resize.hpp include/detect/detect_indexref.hpp include/detect/detect_foab.hpp)
+        include/box/apply.hpp
+        include/detect/detect_allocator.hpp
+        include/detect/detect_tostring.hpp
+        include/util/log.hpp include/detect/detect_tuple.hpp
+        include/detect/detect_fo.hpp include/rw/wf.hpp
+        include/detect/detect_totext.hpp
+        include/util/symbolizer.hpp
+        include/detect/detect_push_back.hpp
+        include/detect/detect_insert.hpp
+        include/cmorph/imorph/apply.hpp
+        include/cmorph/imorph/process.hpp include/cmorph/amorph/h/apply.hpp include/cmorph/amorph/select.hpp include/util/call.hpp include/cmorph/amorph/hv/apply.hpp include/cmorph/amorph/hv/select.hpp include/cmorph/amorph/hv/process.hpp include/detect/detect_fa2box.hpp include/cmorph/imorph/boxtrans.hpp)
 
 add_executable(stepworks main.cpp ${ST_INCLUDES})
 

@@ -6,6 +6,7 @@
 #define STEPWORKS_DETECT_FOAB_HPP
 
 #include <type_traits>
+#include <concepts>
 
 namespace stepworks::detect{
 
@@ -19,9 +20,12 @@ namespace stepworks::detect{
             ://std::true_type
                     std::is_same<
                             Tb,
-                                    decltype(std::declval<F>(std::declval<Ta>()))
+                                    decltype( std::declval<F>()(std::declval<Ta>()))
                     >::type
     {};
+
+    template<typename F, typename Ta, typename Tb>
+    concept Foab = is_foab<F, Ta, Tb>::value;
 
 
 }

@@ -9,7 +9,7 @@
 #include <detect/detect_iterable.hpp>
 #include <iostream>
 
-using stepworks::bxx::detect::is_forward_iterable;
+using stepworks::detect::is_forward_iterable;
 
 ///handles problems with continuos operation to potentially singular (result) 'writing' types (filehandles etc)
 

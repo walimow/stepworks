@@ -82,7 +82,7 @@ iox_test.cpp
         boxinl_test.cpp
         boxmk_test.cpp
 
-        detect_tostring.cpp logsupport_test.cpp cmorph_test.cpp)
+        detect_tostring.cpp logsupport_test.cpp cmorph_test.cpp amorph_test.cpp)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
 

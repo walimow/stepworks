@@ -5,6 +5,9 @@
 #ifndef STEPWORKS_IOX_HPP
 #define STEPWORKS_IOX_HPP
 
+#include <sstream>
+#include <memory>
+
 namespace stepworks::iox{
 
 

@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <util/iox.hpp>
 
+
 using stepworks::iox::to_type_textable;
 
 namespace stepworks{
@@ -12,11 +13,11 @@ namespace stepworks{
     class  Compare= std::less<K>,  
     class Allocator = std::allocator<std::pair<const K, T> > >
     struct hmap{
-        using Map=std::map<K,T,Compare, Allocator> ;
+        using map_t=std::map<K,T,Compare, Allocator> ;
         const hmap * _psuper=nullptr;
-        Map  _map;
+        map_t  _map;
         inline auto  avail0(const K& k)const {  return _map.find(k) == _map.end();}
-        std::pair< typename Map::const_iterator, int > select (const K&k, int level=0)const {
+        std::pair< typename map_t::const_iterator, int > select (const K&k, int level=0)const {
             auto it = _map.find(k);
             return  it != _map.end() ?
                  std::make_pair(it, level)
@@ -40,10 +41,15 @@ namespace stepworks{
             out << end<<delim;
         return out;
 }
-
-
     };
 
+    template <class K, class T,
+            class  Compare= std::less<K>,
+            class Allocator = std::allocator<std::pair<const K, T> > >
+    auto  mk_hmap( typename hmap<K,T,Compare,Allocator>::map_t&& m ,
+                   hmap<K,T,Compare,Allocator>*psuper= nullptr){
+        return      hmap<K,T,Compare,Allocator>{psuper, std::move(m) };
+    }
 
 
     

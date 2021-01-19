@@ -6,7 +6,7 @@
 #define STEPWORKS_DETECT_FO_HPP
 
 #include <type_traits>
-#include <>
+
 namespace stepworks::detect {
 
     /*

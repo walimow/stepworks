@@ -7,7 +7,7 @@
 #include <gtest/gtest.h>
 #include <detect/detect_tostring.hpp>
 
-using stepworks::bxx::detect::supports_tostring;
+using stepworks::detect::supports_tostring;
 
 TEST(detect_tostring, pos){
     auto y = supports_tostring<int>::value;

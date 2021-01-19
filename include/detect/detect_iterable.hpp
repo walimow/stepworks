@@ -7,7 +7,8 @@
 
 #include <type_traits>
 
-namespace stepworks::bxx::detect {
+
+namespace stepworks::detect {
 
     template<typename C, typename=void>
     struct is_forward_iterable : std::false_type {

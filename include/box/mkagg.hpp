@@ -173,21 +173,7 @@ assert(false); ///std::initializer ("in itself") dont work ..... (yet?)
 
     };
 
-
-
-
 }
 
-namespace  stepworks::bx{
-
-/*
-    template <typename Ty , template <typename...> typename Aggregation>
-    box<Ty, Aggregation>::box( std::initializer_list<  std::variant < Ty,             box<Ty,Aggregation>  >> il){
-
-      //    _value = stepworks::bx::make::mk_aggregate< box<Ty, Aggregation> >::apply(std::move(il));   // mk_box_value<Ty, Aggregation>(std::move(il));
-    }
-*/
-
-}
 
 #endif //STEPWORKS_MKBOXAGG_HPP

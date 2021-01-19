@@ -23,7 +23,7 @@ namespace stepworks::bxx{
         return  b._value.index() ?
                 stepworks::iterativ_continuation( w,  std::get<typename box<Ty, Aggregate>::agg_t>(b._value), std::move(vol) )
                 :
-                w( std::get<typename box<Ty, Aggregate>::base_t>(b._value), std::forward< const  typename  W::value_t&& >(vol)) ;
+                w( std::get<typename box<Ty, Aggregate>::base_t>(b._value), std::move(vol)) ;
 
     }
 

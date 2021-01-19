@@ -1,15 +1,15 @@
 #include "gtest/gtest.h"
 #include <tuple>
-#include <eal/trace_t.hpp>
+#include <util/trace_tuple.hpp>
 #include <eal/cons_t.hpp>
 #include <eal/util_t.hpp>
 #include <eal/partl_t.hpp>
 
-using stepworks::eal::trace_t;
+using stepworks::util::trace_tuple;
 
 TEST(  tupleops_test, trace) {
-    trace_t("hallo?");
-    trace_t(std::make_tuple(1, 2, 3));
+    trace_tuple("hallo?");
+    trace_tuple(std::make_tuple(1, 2, 3));
 }
 
 
@@ -18,12 +18,12 @@ using stepworks::eal::cons;
 TEST(  tupleops_test, cons1) {
     auto ret = cons( std::make_tuple(1,2,3), 4);
     std::cout <<"\n--1,2,3,4---\n";
-    trace_t( std::move(  ret));
+    trace_tuple( std::move(  ret));
 
     const auto& cr=ret;
 
     std::cout <<"\n----\n";
-    trace_t(  cr);
+    trace_tuple(  cr);
 }
 
 TEST(  tupleops_test, cons2) {
@@ -31,7 +31,7 @@ TEST(  tupleops_test, cons2) {
                                       std::make_tuple(4,5,6)
                                     );
     std::cout <<"\n--1,2,3,4,5,6---\n";  
-    trace_t(   ret);
+    trace_tuple(   ret);
 }
 
 
@@ -100,7 +100,7 @@ using stepworks::eal::tuple_sz;
 TEST (tupleops_test, tail5){
                          
     auto t4 =  tail( std::make_tuple(1,2,3,4,5));
-    trace_t(t4);
+    trace_tuple(t4);
      EXPECT_EQ(4, tuple_sz(t4));
 }
 

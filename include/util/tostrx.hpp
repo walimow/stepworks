@@ -24,7 +24,7 @@ namespace stepworks {
     } formopt;
 
     template <typename Ty>
-    requires (stepworks::bxx::detect::supports_tostring<Ty>::value )
+    requires (stepworks::detect::supports_tostring<Ty>::value )
     auto to_string(const Ty& a){
         return std::to_string(a);
     }
@@ -72,7 +72,7 @@ namespace stepworks {
 
     template<typename Ty, template<typename ...> typename Form, typename Allocator>
 ///todo requires iterable
-    requires ( stepworks::bxx::detect::is_forward_iterable< Form<Ty>>::value )
+    requires ( stepworks::detect::is_forward_iterable< Form<Ty>>::value )
     auto to_string(const Form<Ty, Allocator> &v, int opt_ = 0) {
         int opt = opt_;
         if (!opt)

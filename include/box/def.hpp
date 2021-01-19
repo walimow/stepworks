@@ -24,8 +24,12 @@ namespace stepworks::bxx{
 
         using type_enum=enum{eatom=0, eaggregate=1};
 
-        type _value;
+        struct agg_position{
+            const agg_t& _container;
+            typename agg_t::const_iterator _it;
+        };
 
+        type _value;
 
         box(type v) : _value(std::forward<type>(v)) {     //   std::cout<<"-1-";
         }
@@ -71,7 +75,7 @@ namespace stepworks::bxx{
         }
 
         friend std::ostream& operator <<   (std::ostream& s, const box<Ty, Aggregation>& o){
-            s << to_string(o);  //!!!!!!!!!!!!!!!!! todoooo
+            s << to_string(o);
             return s;
         };
     };

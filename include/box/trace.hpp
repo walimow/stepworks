@@ -45,10 +45,10 @@ namespace stepworks::bxx::util {
             return data_t{*this, pre,post};
         }
 
-        using fpre_aggregate = data_t (*)(data_t , const typename box<Ty, Aggregate>::agg_t &);
+        using fpre_aggregate = data_t (*)( const typename box<Ty, Aggregate>::agg_t &, data_t&&);
         fpre_aggregate _fpre;
 
-        using fpost_aggregate = data_t (*)(data_t , const typename box<Ty, Aggregate>::agg_t &);
+        using fpost_aggregate = data_t (*)(const typename box<Ty, Aggregate>::agg_t &, data_t&&);
         fpost_aggregate _fpost;
 
 
@@ -73,42 +73,42 @@ namespace stepworks::bxx::util {
        //     return std::move(d);
         }
 
-        auto operator()(const Ty &a,  const data_t&& d) const {
-         //   d._count++;
-         //todooooo   d._total++;
+        auto operator()(const Ty &a,   data_t&& d) const {
             return  wpost_text( wpost_a( a, wpre_text(std::move(d))) );
         }
 
-        auto perform_pre(const typename  box<Ty,Aggregate>::agg_t  &a, const data_t&& d) const {
+        auto perform_pre(const typename  box<Ty,Aggregate>::agg_t  &a, data_t&& d) const {
             return _fpre ? _fpre(a, std::move(d)) : std::move(d);
         }
 
-        auto perform_post(const typename  box<Ty,Aggregate>::agg_t  &a, const data_t&& d) const {
-            return _fpost ? _fpost(a, std::move(d)) : std::move(d);
+        auto perform_post(const typename  box<Ty,Aggregate>::agg_t  &a,  data_t&& d) const {
+            return _fpost ?
+            _fpost(a, std::move(d)) :
+            std::move(d);
         }
 
-        auto perform_agg(const typename  box<Ty,Aggregate>::agg_t &a, const data_t&& d) const {
+        auto perform_agg(const typename  box<Ty,Aggregate>::agg_t &a,  data_t&& d) const {
             return stepworks::iterativ_continuation(*this, a, std::move(d)   );
         }
 
 
 
-        auto perform_choice(const typename  box<Ty,Aggregate>::type &a, const data_t&& d) const
+        auto perform_choice(const typename  box<Ty,Aggregate>::type &a,  data_t&& d) const
                 {
                         const auto& o= d._src_fo;
-                       auto test_ = a.index();   std::cout<<"--->"<<test_<<"<---\n";
+                       auto test_ = a.index(); //  std::cout<<"--->"<<test_<<"<---\n";
                        assert(test_ <=1);
                         return   a.index()==0  ?
-                        o(  std::get< Ty >(a) , std::forward<const data_t&&>(d) )
+                        o(  std::get< Ty >(a) , std::move(d) )
                         :
-                        o(  std::get< typename box<Ty,Aggregate>::agg_t >(a) , std::forward<const data_t&&>(d) );
+                        o(  std::get< typename box<Ty,Aggregate>::agg_t >(a) , std::move(d) );
                 };
 
-        auto operator()(const typename box<Ty,Aggregate>::agg_t  &a, data_t&& d) const->data_t {
+        auto operator()(const typename box<Ty,Aggregate>::agg_t  &a,  data_t&& d) const->data_t {
             return  perform_post(a,  perform_agg( a,    perform_pre(a, std::move(d))));
         }
 
-        auto operator()(const typename box<Ty,Aggregate>::type &a, const data_t&& d) const->const stream_box::data_t;
+        auto operator()(const typename box<Ty,Aggregate>::type &a,  data_t&& d) const->const stream_box::data_t;
 
         data_t pre_aggregate(const typename box<Ty, Aggregate>::agg_t &a, data_t&& d) const {
 
@@ -132,8 +132,8 @@ namespace stepworks::bxx::util {
 
     template<typename Ty, template <typename...>typename Aggregate>
     auto stream_box <Ty, Aggregate>
-    ::operator()(const typename box<Ty, Aggregate>::type &a, const stream_box::data_t&& d) const ->const stream_box::data_t{
-std::cout<<"-!- "<< a.index()<<".\t";
+    ::operator()(const typename box<Ty, Aggregate>::type &a,  stream_box::data_t&& d) const ->const stream_box::data_t{
+//std::cout<<"-!- "<< a.index()<<".\t";
   //     auto t = a.index();
         return  perform_choice(a, std::move(d));
     }

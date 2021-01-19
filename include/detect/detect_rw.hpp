@@ -4,194 +4,234 @@
 #include <type_traits>
 #include <utility>
 
-namespace stepworks {
+namespace stepworks::detect {
 
 //reader without context
-namespace r0 {
+    namespace r0 {
 
-template< class, class = void>
-struct is_reader_tR : std::false_type {};
+        template<class, class = void>
+        struct is_reader_tR : std::false_type {
+        };
 
 
-template <class R>
-struct is_reader_tR<R,
-       std::void_t<            decltype(_(std::declval<R&&>()   ))       >
-       >
-       :
-       std::is_same <       std::pair< R, typename R::element_type> ,       decltype(           _(std::declval<R&&>())       )       >::type
-       { };
-}
+        template<class R>
+        struct is_reader_tR<R,
+                std::void_t<decltype(_(std::declval<R &&>()))>
+        >
+                :
+                        std::is_same<std::pair<R, typename R::element_type>, decltype(_(std::declval<R &&>()))>::type {
+        };
+    }
 
 
 
 ///reader with context
-namespace rcx {
-template<typename R, typename =void>  struct is_reader_tR : std::false_type {};
+    namespace rcx {
+        template<typename R, typename =void>
+        struct is_reader_tR : std::false_type {
+        };
 
 
-template <class R>
-struct is_reader_tR<R,  std::void_t< decltype(_ (    std::declval<R&&>(),    std::declval < const typename R::context_type&>()               )  )  >       >
-       :
-       std::is_same <       std::pair< R, typename R::element_type>
-       ,
-       decltype(
-           _  (std::declval<R&&>(), std::declval<const typename R::context_type& >()) //( 			std::declval<  R&&>())
-       )
-       >::type
-       { };
+        template<class R>
+        struct is_reader_tR<R, std::void_t<decltype(_(std::declval<R &&>(),
+                                                      std::declval<const typename R::context_type &>()))> >
+                :
+                        std::is_same<std::pair<R, typename R::element_type>,
+                                decltype(
+                                _(std::declval<R &&>(),
+                                  std::declval<const typename R::context_type &>()) //( 			std::declval<  R&&>())
+                                )
+                        >::type {
+        };
 
-}
+    }
 
 ///reader without context, returns framed reader R->(R),e
-namespace r0x {
+    namespace r0x {
 
-template< class, class = void>
-struct is_reader_tR : std::false_type {};
+        template<class, class = void>
+        struct is_reader_tR : std::false_type {
+        };
 
-template <class R>
-struct is_reader_tR<R,       std::void_t< decltype( _( std::declval<R&&>()   )  )  >    >
-       : std::is_same < std::pair<   typename R::base_return_framed_type      ,
-       typename R::element_type     >
-       ,
-       decltype(           _(std::declval<R&&>())       )   >::type
-       { };
-}
+        template<class R>
+        struct is_reader_tR<R, std::void_t<decltype(_(std::declval<R &&>()))> >
+                : std::is_same<std::pair<typename R::base_return_framed_type,
+                        typename R::element_type>,
+                        decltype(_(std::declval<R &&>()))>::type {
+        };
+    }
 
 ///reader with context, returns framed reader
-namespace rxcx {
+    namespace rxcx {
 
-template< class, class = void>
-struct is_reader_tR : std::false_type {};
+        template<class, class = void>
+        struct is_reader_tR : std::false_type {
+        };
 
-template <class R>
-struct is_reader_tR<R,
-       std::void_t< decltype(
-           _( std::declval<R&&>(),
-              std::declval < const typename R::context_type&>()
-            )
-       )
-       >
-
-       >
-       : std::is_same <
-
-       std::pair<
-       typename R::base_return_framed_type
-       ,
-       typename R::element_type
-       >
-       ,
-       decltype(
-           _(std::declval<R&&>()
-             , std::declval<const typename R::context_type& >()
-            )
-       )
-
-       >::type
-       { };
-}
-
-namespace w0 {
-
-template< class, class = void>	struct is_writer_tR : std::false_type {};
-
-template <class W>
-struct is_writer_tR<W,
-       std::void_t< decltype(_( std::declval<W&&>(),
-                                std::declval<typename W::element_type&&>() )  )       >
-       >
-       :
-       std::is_same <
-       W
-       ,
-       decltype(_
-                (
-                    std::declval<W&&>(), std::declval<typename W::element_type&&>()
+        template<class R>
+        struct is_reader_tR<R,
+                std::void_t<decltype(
+                _(std::declval<R &&>(),
+                  std::declval<const typename R::context_type &>()
                 )
-               )
-
-       >::type
-
-
-       { };
-}
-
-namespace wx0 {
-
-template< class, class = void>	struct is_writer_tR : std::false_type {};
-
-template <class W>
-struct is_writer_tR<W,
-       std::void_t< decltype(_( std::declval<W&&>(),
-                                std::declval<typename W::element_type&&>() )  )       >
-       >
-       :
-       std::is_same <
-       typename W::base_return_framed_type
-       ,
-       decltype(_
-                (
-                    std::declval<W&&>(), std::declval<typename W::element_type&&>()
                 )
-               )
+                >
 
-       >::type
-       { };
-}
+        >
+                : std::is_same<
+
+                        std::pair<
+                                typename R::base_return_framed_type,
+                                typename R::element_type
+                        >,
+                        decltype(
+                        _(std::declval<R &&>(), std::declval<const typename R::context_type &>()
+                        )
+                        )
+
+                >::type {
+        };
+    }
+
+    namespace w0 {
+
+        template<class, class = void>
+        struct is_writer_tR : std::false_type {
+        };
+
+        template<class W>
+        struct is_writer_tR<W,
+                std::void_t<decltype(_(std::declval<W &&>(),
+                                       std::declval<typename W::element_type &&>()))>
+        >
+                :
+                        std::is_same<
+                                W,
+                                decltype(_
+                                        (
+                                                std::declval<W &&>(), std::declval<typename W::element_type &&>()
+                                        )
+                                )
+
+                        >::type {
+        };
+    }
 
 
+    namespace wx0 {
 
-namespace wcx {
+        template<class, class = void>
+        struct is_writer_tR : std::false_type {
+        };
 
-template< class,  class = void>
-struct is_writer_tR : std::false_type {};
+        template<class W>
+        struct is_writer_tR<W,
+                std::void_t<decltype(_(std::declval<W &&>(),
+                                       std::declval<typename W::element_type &&>()))>
+        >
+                :
+                        std::is_same<
+                                typename W::base_return_framed_type,
+                                decltype(_
+                                        (
+                                                std::declval<W &&>(), std::declval<typename W::element_type &&>()
+                                        )
+                                )
 
-template <class W>
-struct is_writer_tR<W,
-       std::void_t<            decltype(_( std::declval<W&&>(),
-                                        std::declval< typename W::element_type&&>(),
-                                        std::declval < const typename W::context_type&>()
-                                         )
-                                       )
-       >
-       >
-       :
-       std::is_same <
-       W
-       ,
-       decltype(_( std::declval<W&&>(),
-                   std::declval< typename W::element_type&&>()
-                   ,       std::declval < const typename W::context_type&>())
-               )
-       >::type
-       { };
-}
+                        >::type {
+        };
+    }
 
-namespace wxcx {
 
-template< class,  class = void>
-struct is_writer_tR : std::false_type {};
+    namespace wcx {
+
+        template<class, class = void>
+        struct is_writer_tR : std::false_type {
+        };
+
+        template<class W>
+        struct is_writer_tR<W,
+                std::void_t<decltype(_(std::declval<W &&>(),
+                                       std::declval<typename W::element_type &&>(),
+                                       std::declval<const typename W::context_type &>()
+                )
+                )
+                >
+        >
+                :
+                        std::is_same<
+                                W,
+                                decltype(_(std::declval<W &&>(),
+                                           std::declval<typename W::element_type &&>(),
+                                           std::declval<const typename W::context_type &>())
+                                )
+                        >::type {
+        };
+    }
+
+    namespace wxcx {
+
+        template<class, class = void>
+        struct is_writer_tR : std::false_type {
+        };
 
 /////////////////
 
-template <class W>
-struct is_writer_tR<W,
-       std::void_t<            decltype(_( std::declval<W&&>(),
-                                        std::declval< typename W::element_type&&>(),
-                                        std::declval < const typename W::context_type&>())
-                                       )
-       >
-       >
-       : 
-       std::is_same <
-       typename W::base_return_framed_type
-       ,
-       decltype(_( std::declval<W&&>(),
-                   std::declval< typename W::element_type&&>()
-                   ,       std::declval < const typename W::context_type&>())
-               )
-       >::type       
-       { };
+        template<class W>
+        struct is_writer_tR<W,
+                std::void_t<decltype(_(std::declval<W &&>(),
+                                       std::declval<typename W::element_type &&>(),
+                                       std::declval<const typename W::context_type &>())
+                )
+                >
+        >
+                :
+                        std::is_same<
+                                typename W::base_return_framed_type,
+                                decltype(_(std::declval<W &&>(),
+                                           std::declval<typename W::element_type &&>(),
+                                           std::declval<const typename W::context_type &>())
+                                )
+                        >::type {
+        };
+    }
+
+    namespace wp {
+
+        template<class, class, class = void>
+        struct is_wprocessor : std::false_type {
+        };
+
+        /* //WriteProcessor (WP)  contains (static)  transformation W (const Ta&)->Tb   (wp as its own context)
+                                                    write      apply (const Tb&,  WP&&)->W              (wp as writing)
+          */
+
+
+        template<typename Wp, typename Ta>
+        struct is_wprocessor<Wp, Ta,
+                std::void_t<
+                        decltype(std::declval<Wp>()(std::declval<Ta>())),
+
+                        decltype(
+                        Wp::apply(
+                                std::move(std::declval<Wp>()),
+                                std::declval<decltype(std::declval<Wp>()(std::declval<Ta>()))>()
+                        )
+                        )
+                >
+        >
+                :
+
+                        std::is_same<
+
+                                decltype(Wp::apply(
+                                        std::move( std::declval<Wp>() ),
+                                        std::declval<Wp>()(std::declval<Ta>()))),
+                                Wp
+                        >::type {
+        };
+
+    }
 }
 
-}
+
