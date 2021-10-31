@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.0)
 
 project(test)
  
@@ -81,8 +81,12 @@ iox_test.cpp
         box0_test.cpp
         boxinl_test.cpp
         boxmk_test.cpp
+        box_test.cpp
 
-        detect_tostring.cpp logsupport_test.cpp cmorph_test.cpp amorph_test.cpp)
+        detect_tostring_test.cpp logsupport_test.cpp cmorph_test.cpp amorph_test.cpp test_detect_variant.cpp
+        fmeta_test.cpp
+
+        )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
 

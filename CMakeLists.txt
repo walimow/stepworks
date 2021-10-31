@@ -1,5 +1,7 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.0)
 project(stepworks)
+
+set_property(TARGET  PROPERTY CXX_STANDARD 20)
 
 add_definitions ( -Wall   -lstdc++ )
 
@@ -22,15 +24,19 @@ set( ST_INCLUDES  include/util/iox.hpp include/box/boxm.hpp
         include/util/ignore.hpp include/util/tostrx.hpp include/eal/val.hpp include/box/constr.hpp include/box/mkbox.hpp
         include/box/apply.hpp
         include/detect/detect_allocator.hpp
-        include/detect/detect_tostring.hpp
         include/util/log.hpp include/detect/detect_tuple.hpp
         include/detect/detect_fo.hpp include/rw/wf.hpp
         include/detect/detect_totext.hpp
+        include/detect/detect_tostring.hpp
         include/util/symbolizer.hpp
         include/detect/detect_push_back.hpp
         include/detect/detect_insert.hpp
+        include/detect/detect_fmeta.hpp
         include/cmorph/imorph/apply.hpp
-        include/cmorph/imorph/process.hpp include/cmorph/amorph/h/apply.hpp include/cmorph/amorph/select.hpp include/util/call.hpp include/cmorph/amorph/hv/apply.hpp include/cmorph/amorph/hv/select.hpp include/cmorph/amorph/hv/process.hpp include/detect/detect_fa2box.hpp include/cmorph/imorph/boxtrans.hpp)
+        include/cmorph/imorph/process.hpp include/cmorph/amorph/h/apply.hpp include/cmorph/amorph/select.hpp include/util/call.hpp include/cmorph/amorph/hv/apply.hpp
+        include/cmorph/amorph/hv/select.hpp
+        include/cmorph/amorph/hv/process.hpp include/detect/detect_fa2box.hpp include/cmorph/imorph/boxtrans.hpp include/detect/detect_variant.hpp
+        include/tuplex/util.hpp include/fmeta/fnx.hpp)
 
 add_executable(stepworks main.cpp ${ST_INCLUDES})
 

@@ -21,7 +21,7 @@ namespace  stepworks::imorph{
     requires (
             stepworks::detect::is_forward_iterable<Cs<Ta>>::value
             &&
-            stepworks::detect::wp::is_wprocessor<Fab,Ta>::value
+            stepworks::wp::is_wprocessor<Fab,Ta>::value
     )
     static auto process_imorph( const Cs<Ta>& src,  Fab&& fab=Fab()){
         for (const auto & a: src)

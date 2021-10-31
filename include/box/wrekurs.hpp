@@ -33,9 +33,9 @@ auto apply_iterativ_continuation( const F& f,
 
     :
     apply_iterativ_continuation(   f,
-                                   f(*it, std::forward<
+                                   f(*it++, std::forward<
             //const
-            W&&>(w) ) , it_t, ++it   ) ;
+            W&&>(w) ) , it_t, it   ) ;
 }
 
 template<typename F , typename Iterable_t

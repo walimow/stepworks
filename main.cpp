@@ -6,23 +6,7 @@
 
 #include <box/box.hpp>
 #include <box/apply.hpp>
-/*
-using stepworks::bxx::apply;
-//using stepworks::bxx::apply_f;
 
-
-template <typename Ty>
-struct s_print{
-
-    using value_t= Ty;
-
-    auto operator()(const Ty& a, value_t && x )const{
-     std::cout<< a << "  ";
-        return std::move(++x);
-    }
-};
-
- */
 
 int main(){
     int rc=0;

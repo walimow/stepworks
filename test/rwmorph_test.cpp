@@ -1,8 +1,9 @@
 #include "gtest/gtest.h"
 //#include <stwtype_traits.hpp>
 
-#include <detect_rw.hpp>
+#include <detect/detect_rw.hpp>
 #include <variant>
+#include <optional>
 
 TEST (rwmorph_test_case, read0)
 {

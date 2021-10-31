@@ -20,14 +20,14 @@ struct process_item<Base,Rest...>: process_item<Rest...>    //Base-> po
     using continuation_t =  stepworks::process::continuation_item< Base, Rest...> ;
    
     Base _base = Base{};
-    process_item<Base,Rest...>(Base&& b,
+    process_item(Base && b,
                                Rest&&... r):
         process_item<Rest...>
         (           std::move(r)...        ) 
         , _base(std::move(b))
         {}
 
-    process_item<Base,Rest...>(Base&& b,
+    process_item(Base && b,
                                process_item<Rest...>&& r):
         process_item<Rest...>        ( std::move(r)     ) 
         , _base(std::move(b))
@@ -56,7 +56,7 @@ struct process_item<Base>
     }
     
     Base _base;
-    process_item<Base>(Base&& b):
+    process_item(Base&& b):
         _base(std::move(b))
         {}
     /*    

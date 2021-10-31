@@ -25,7 +25,15 @@ namespace stepworks::bxx::util {
             stepworks::bxx::ref_wrapper<std::ostream> _r{std::cout};
 
             int level = 0;
-       //     unsigned int _count = 0;
+            inline auto& up(){
+                ++level;
+                return *this;}
+            inline auto& down(){
+                --level;
+                return *this;}
+
+
+            //     unsigned int _count = 0;
             unsigned int _total = 0;
 
             data_t(const data_t&)=delete;
@@ -53,9 +61,9 @@ namespace stepworks::bxx::util {
 
 
         auto wpre_text(const data_t&&d) const {
+           for (int i=0; i<d.level; i++)
+                d._r._ref<<'\t';
             d._r._ref<<d.pre_text;
-      //      return std::move(d);
-      //      return std::forward<const data_t>(  (data_t&&) d);
             return data_t( const_cast<data_t&&> (d) );
 
         }
@@ -78,13 +86,12 @@ namespace stepworks::bxx::util {
         }
 
         auto perform_pre(const typename  box<Ty,Aggregate>::agg_t  &a, data_t&& d) const {
-            return _fpre ? _fpre(a, std::move(d)) : std::move(d);
+            return _fpre ? _fpre(a, std::move(d.up())) : std::move(d.up());
         }
 
         auto perform_post(const typename  box<Ty,Aggregate>::agg_t  &a,  data_t&& d) const {
             return _fpost ?
-            _fpost(a, std::move(d)) :
-            std::move(d);
+             _fpost(a, std::move(d.down())) : std::move(d.down());
         }
 
         auto perform_agg(const typename  box<Ty,Aggregate>::agg_t &a,  data_t&& d) const {

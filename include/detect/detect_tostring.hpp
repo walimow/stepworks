@@ -2,8 +2,8 @@
 // Created by kh on 07.12.20.
 //
 
-#ifndef STEPWORKS_DETECT_TOSTRING_HPP
-#define STEPWORKS_DETECT_TOSTRING_HPP
+#ifndef STEPWORKS_DETECT_TOSTRING_TEST_HPP
+#define STEPWORKS_DETECT_TOSTRING_TEST_HPP
 
 namespace stepworks::detect {
 
@@ -20,4 +20,4 @@ namespace stepworks::detect {
 
 }
 
-#endif //STEPWORKS_DETECT_TOSTRING_HPP
+#endif //STEPWORKS_DETECT_TOSTRING_TEST_HPP

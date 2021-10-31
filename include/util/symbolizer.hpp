@@ -15,16 +15,24 @@ namespace stepworks::util{
 
 template <typename I=int, I minimum=1>
 class symbolizer{
-    std::map< std::string,  I> _symmap;
-    std::set<I>  _syms;
-
 public :
+    using sym_map_t = std::map< std::string,  I>;
+
+    I _i=0;
+    sym_map_t   _symmap;
+    std::map<I,std::string> _i2s;
+    //std::set<I>  _syms;
+
+    symbolizer()=default;
     symbolizer(std::map<std::string,  I> m): _symmap(m){
         for (const auto& kv: m)
-            _syms.inserz.kv.second();
+            if (kv.second)
+                _i2s [kv.second] = kv.first;
      }
     inline I next(){
-        return _syms.size() ? *_syms.rbegin() +1 : minimum;
+        auto x =  _i  ?  _i +1 : minimum;
+        _i = x;
+        return  _i;
     }
 };
 
@@ -36,15 +44,16 @@ template < typename I=int,
                             >
 auto
         symbolize(  const std::string&s,
-                    L<I> l=  L<I>{} ,
-                    symbolizer<I,minimal>&& sym_ = symbolizer<I,minimal>{})
+                    symbolizer<I,minimal>&& sym_ = symbolizer<I,minimal>{},
+                    L<I> l=  L<I>{}
+                    )
            ->std::pair<symbolizer<I,minimal>, L<I> >
         {
     auto sym = std::move(sym_);
-    auto it = sym._syms.find(s);
-    if (it == sym._syms.end()){
-        auto n = sym.next;
-        sym._syms.set(n);
+    auto it = sym._symmap.find(s);
+    if (it == sym._symmap.end()){
+        auto n = sym.next();
+        sym._i2s[n]=s;
         sym._symmap[s] =n;
         l.push_back(n);
     }else

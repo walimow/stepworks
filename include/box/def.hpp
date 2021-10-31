@@ -49,8 +49,6 @@ namespace stepworks::bxx{
         box(std::initializer_list< //std::variant<Ty,
                 typename   box<Ty, Aggregation>::type  > il);
 
-
-
         template<typename B =  typename  box<Ty,std::initializer_list>::type, typename =     typename std::enable_if_t
                 <
                        ! std::is_same<B, type>::value>::type>
@@ -72,6 +70,100 @@ namespace stepworks::bxx{
 
         operator type () const{
             return _value;
+        }
+/*
+        bool operator==( const typename box<Ty,Aggregation>::type& other)const{
+            struct {
+                auto operator()(const Ty& la, const Ty&ra) const   {return la == ra;};
+                auto operator()(const Ty& la, const typename box<Ty,Aggregation>::agg_t& rc ) const   {return false;};
+                auto operator()(const typename box<Ty,Aggregation>::agg_t& lc, const Ty& ra )  const  {return false;};
+                auto operator()(const typename box<Ty,Aggregation>::agg_t& lc, const typename box<Ty,Aggregation>::agg_t& rc )  const {
+                    const auto itl = lc.cbegin();
+                    const auto itr = rc.cbegin();
+                    while(itl!= lc.cend() && itr!= rc.cend()){
+                        if ( !eq(*itl , *itr)){
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+            } vis;
+            return std::visit( vis,_value,other);
+        }
+
+       inline bool operator==( const box<Ty,Aggregation>& other)const{
+            return _value==other._value;
+        }
+
+        std::strong_ordering operator<=>(const  typename box<Ty,Aggregation>::type& other) const {
+                struct {
+                    auto operator()(const Ty& la, const Ty&ra)  const  {return la <=> ra;};
+                    auto operator()(const Ty& la, const typename box<Ty,Aggregation>::agg_t& rc ) const   {
+                        return rc.size()>0 ? false :  true ;};
+                    auto operator()(const typename box<Ty,Aggregation>::agg_t& lc, const Ty& ra )const    {
+                        return lc.size()==0 ?  true : false  ;};
+                    auto operator()(const typename box<Ty,Aggregation>::agg_t& lc, const typename box<Ty,Aggregation>::agg_t& rc ) const ->std::strong_ordering {
+                        const auto itl = lc.cbegin();
+                        const auto itr = rc.cbegin();
+                        while(itl!= lc.cend() && itr!= rc.cend()){
+                            if ( !eq(*itl,*itr))
+                                return *itl < itr->_value;
+                        }
+                        return itl== lc.cend()  ? itr==rc.cend() ? false :true
+                        : false //itr==rc.cend() ?  std::strong_ordering::equal : std::strong_ordering::greater;
+                        ;
+                    };
+                } vis;
+                return std::visit( vis,_value,other);
+
+        }
+
+        bool operator<(const  typename box<Ty,Aggregation>::type& other) const {
+            struct {
+                auto operator()(const Ty& la, const Ty&ra)  const  {return la < ra;};
+                auto operator()(const Ty& la, const typename box<Ty,Aggregation>::agg_t& rc ) const   {
+                    return rc.size()>0 ?  std::strong_ordering::greater :  std::strong_ordering::less ;};
+                auto operator()(const typename box<Ty,Aggregation>::agg_t& lc, const Ty& ra )const    {
+                    return lc.size()==0 ?  std::strong_ordering::less : std::strong_ordering::greater  ;};
+                auto operator()(const typename box<Ty,Aggregation>::agg_t& lc, const typename box<Ty,Aggregation>::agg_t& rc ) const ->std::strong_ordering {
+                    const auto itl = lc.cbegin();
+                    const auto itr = rc.cbegin();
+                    while(itl!= lc.cend() && itr!= rc.cend()){
+                        if ( !eq(*itl,*itr))
+                            return itl->operator<=>( itr->_value);
+                    }
+                    return itl== lc.cend()  ? itr==rc.cend() ?  std::strong_ordering::equal :std::strong_ordering::less
+                    :  itr==rc.cend() ?  std::strong_ordering::equal : std::strong_ordering::greater;
+                    ;
+                };
+            } vis;
+            return std::visit( vis,_value,other);
+
+        }
+*/
+        inline std::weak_ordering operator<=>(const box<Ty,Aggregation>& other) const {
+/*
+            struct {
+                auto operator()(const Ty& la, const Ty&ra)  const  {return la <=> ra;};
+                auto operator()(const Ty& la, const typename box<Ty,Aggregation>::agg_t& rc ) const   {
+                    return rc.size()>0 ? std::strong_ordering::less : std::strong_ordering::greater;};
+                auto operator()(const typename box<Ty,Aggregation>::agg_t& lc, const Ty& ra )const    {
+                    return lc.size()==0 ? std::strong_ordering::greater :  std::strong_ordering::less ;};
+                auto operator()(const typename box<Ty,Aggregation>::agg_t& lc, const typename box<Ty,Aggregation>::agg_t& rc ) const ->std::strong_ordering {
+                    const auto itl = lc.cbegin();
+                    const auto itr = rc.cbegin();
+                    while(itl!= lc.cend() && itr!= rc.cend()){
+                        if ( *itl !=*itr)
+                            return itl->_value < itr->_value ? std::strong_ordering::less : std::strong_ordering::greater ;
+                    }
+                    return itl== lc.cend()  ? itr==rc.cend() ? std::strong_ordering::equal  : std::strong_ordering::less
+                    : std::strong_ordering::greater //itr==rc.cend() ?  std::strong_ordering::equal : std::strong_ordering::greater;
+                    ;
+                };
+            } vis;
+            return std::visit( vis,_value,other._value);
+*/
+            return _value<=>other._value;
         }
 
         friend std::ostream& operator <<   (std::ostream& s, const box<Ty, Aggregation>& o){

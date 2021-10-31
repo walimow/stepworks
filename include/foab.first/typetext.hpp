@@ -26,7 +26,7 @@ std::void_t<decltype(std::declval<T>().to_text( 1  ))>>
         : std::true_type
 {};
     
-namespace internal{
+namespace helper{
     
     template <typename T>
 std::string to_text(const T& x, const int& opt=0)
@@ -62,7 +62,7 @@ template <typename Ta, int option=0>
 struct to_typetext{
     //constexpr is not literal type
     std::string f1( const Ta& a)const { 
-      return     internal::to_text( a, option); 
+      return     helper::to_text( a, option);
 }
     std::string f0()const {         return "(nothing)";    }
     

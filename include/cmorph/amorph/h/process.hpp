@@ -23,7 +23,7 @@ namespace  stepworks::amorph::h{
     requires (
             stepworks::detect::is_forward_iterable<Cs<Ta>>::value
             &&
-            stepworks::detect::wp::is_wprocessor<Fab,Ta>::value
+            stepworks::wp::is_wprocessor<Fab,Ta>::value
             &&
             stepworks::amorph::detect::context_step_support<Fab>::value
     )
