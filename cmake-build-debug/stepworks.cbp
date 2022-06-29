@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="stepworks"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\test\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib64\;CMake Files\..\..\..\..\usr\lib64\cmake\;CMake Files\..\..\..\..\usr\lib64\cmake\GTest\;CMake Files\..\..\..\..\usr\lib64\cmake\Boost-1.79.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_headers-1.79.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_system-1.79.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.79.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_atomic-1.79.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.79.0\;CMake Files\samples\;CMake Files\samples\wordindex\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stepworks">
+				<Option output="/home/kh/__WORKDIR/stepworks/cmake-build-debug/stepworks" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kh/__WORKDIR/stepworks/./include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 stepworks"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stepworks/fast">
+				<Option output="/home/kh/__WORKDIR/stepworks/cmake-build-debug/stepworks" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kh/__WORKDIR/stepworks/./include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 stepworks/fast"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="runUnitTests">
+				<Option output="/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/runUnitTests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug/test"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kh/__WORKDIR/stepworks/./include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 runUnitTests"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="runUnitTests/fast">
+				<Option output="/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/runUnitTests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug/test"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kh/__WORKDIR/stepworks/./include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 runUnitTests/fast"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="wordindex">
+				<Option output="/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/wordindex" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY"/>
+					<Add option="-DBOOST_SYSTEM_NO_LIB"/>
+					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_NO_LIB"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_ATOMIC_NO_LIB"/>
+					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
+					<Add option="-DBOOST_PROGRAM_OPTIONS_NO_LIB"/>
+					<Add option="-DBOOST_PROGRAM_OPTIONS_DYN_LINK"/>
+					<Add directory="/home/kh/__WORKDIR/stepworks/./include"/>
+					<Add directory="/home/kh/__WORKDIR/stepworks/samples/wordindex/./include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/Makefile&quot;  VERBOSE=1 wordindex"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="wordindex/fast">
+				<Option output="/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/wordindex" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_ERROR_CODE_HEADER_ONLY"/>
+					<Add option="-DBOOST_SYSTEM_NO_LIB"/>
+					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_FILESYSTEM_NO_LIB"/>
+					<Add option="-DBOOST_FILESYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_ATOMIC_NO_LIB"/>
+					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
+					<Add option="-DBOOST_PROGRAM_OPTIONS_NO_LIB"/>
+					<Add option="-DBOOST_PROGRAM_OPTIONS_DYN_LINK"/>
+					<Add directory="/home/kh/__WORKDIR/stepworks/./include"/>
+					<Add directory="/home/kh/__WORKDIR/stepworks/samples/wordindex/./include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/../../../../include/c++/12.1.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/12.1.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/Makefile&quot;  VERBOSE=1 wordindex/fast"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/kh/__WORKDIR/stepworks/cmake-build-debug/samples/wordindex/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/box/apply.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/box/boxm.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/box/constr.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/box/mkbox.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/cmorph/amorph/h/apply.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/cmorph/amorph/hv/apply.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/cmorph/amorph/hv/process.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/cmorph/amorph/hv/select.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/cmorph/amorph/select.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/cmorph/imorph/apply.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/cmorph/imorph/boxtrans.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/cmorph/imorph/process.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_allocator.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_fa2box.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_fmeta.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_fo.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_insert.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_push_back.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_tostring.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_totext.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_tuple.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/detect/detect_variant.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/eal/val.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/fmeta/fnx.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/rw/wf.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/tuplex/util.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/util/call.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/util/ignore.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/util/iox.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/util/log.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/util/symbolizer.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/include/util/tostrx.hpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/main.cpp">
+			<Option target="stepworks"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/samples/wordindex/wordindex.cpp">
+			<Option target="wordindex"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/samples/wordindex/wordindex.h">
+			<Option target="wordindex"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/amorph_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/app_rekurs_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/application_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/argtypetest.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/box0_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/box_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/boxinl_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/boxm_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/boxmk_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/cmorph_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/curf_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/detect_allocator_type_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/detect_iterable_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/detect_tostring_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/detect_writingtype_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/eval_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/filter_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/fmap_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/fmeta_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/fo_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/foab_fab_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/foab_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/hmap_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/iox_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/itx_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/lazy_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/logsupport_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/match_wte_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/match_wtex_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/process_item_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/process_stream_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/processing_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/reposition_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/rgenerator_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/rtype_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/rwmorph_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/rwprimitiv_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/single_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/step_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/steph_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/strutil_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/stx_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/test_detect_variant.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/tupleop_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/var_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/wcontext_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/xT_test.cpp">
+			<Option target="runUnitTests"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/test/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/BoostDetectToolset-1.79.0.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/GTest/GTestConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\GTest\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/GTest/GTestConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\GTest\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/GTest/GTestTargets-noconfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\GTest\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/GTest/GTestTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\GTest\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/Boost-1.79.0/BoostConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Boost-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/Boost-1.79.0/BoostConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Boost-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_headers-1.79.0/boost_headers-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_headers-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_headers-1.79.0/boost_headers-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_headers-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_system-1.79.0/boost_system-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_system-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_system-1.79.0/boost_system-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_system-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_system-1.79.0/libboost_system-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_system-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_system-1.79.0/libboost_system-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_system-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_filesystem-1.79.0/boost_filesystem-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_filesystem-1.79.0/boost_filesystem-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_filesystem-1.79.0/libboost_filesystem-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_filesystem-1.79.0/libboost_filesystem-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_filesystem-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_atomic-1.79.0/boost_atomic-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_atomic-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_atomic-1.79.0/boost_atomic-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_atomic-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_atomic-1.79.0/libboost_atomic-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_atomic-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_atomic-1.79.0/libboost_atomic-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_atomic-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_program_options-1.79.0/boost_program_options-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_program_options-1.79.0/boost_program_options-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_program_options-1.79.0/libboost_program_options-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/../../../../usr/lib64/cmake/boost_program_options-1.79.0/libboost_program_options-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.79.0\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/samples/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\samples\"/>
+		</Unit>
+		<Unit filename="/home/kh/__WORKDIR/stepworks/samples/wordindex/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\samples\wordindex\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
