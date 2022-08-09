@@ -1,6 +1,6 @@
 #pragma once
 #include <type_traits>
-#include    <util/detect.hpp>
+#include  <util/detect.hpp>
 
 
 namespace stepworks::steph
@@ -61,7 +61,7 @@ fmap(const Ft & f,  const Container<Ta>& c) {
 
 ///pure array
 //template < typename Ft,  typename Ta, template<typename...> typename Container>
-template < typename Ft,  typename Ta,  size_t Sz>
+template < typename Ft,  typename Ta,  std::size_t Sz>
 auto
 fmap(const Ft & f,  const std::array<Ta,Sz>& c) {
     using Tb = decltype(f( std::declval<Ta>() ));
